@@ -1,0 +1,30 @@
+# DataScaler
+
+> AI-powered brand competitive intelligence engine for global DTC brands. DataScaler turns public social signals from TikTok, YouTube, Reddit, X and Instagram into 100% traceable, evidence-backed market insights.
+
+DataScaler provides an AI Assistant that produces "conclusion-first, evidence-backed" market briefings. Every insight is anchored to its original public source (the Ref/evidence chain), so brand, growth, and strategy teams can verify findings instead of trusting a black box. Available in English and Simplified Chinese.
+
+## Pages
+
+- [Home (中文)](/): Product overview, AI market intelligence engine, and free-trial CTA.
+- [Home (English)](/en): English landing page with the same product overview.
+- [Pricing (中文)](/pricing): Starter / Pro / Enterprise subscription plans, Credit math, and add-ons.
+- [Pricing (English)](/en/pricing): Subscription plans and Credit-based billing in English.
+- [Blog (中文)](/blog): Research and decision-ready insights on brand intelligence and social listening.
+- [Blog (English)](/en/blog): English research, benchmarks, and analyses.
+- [FAQ (中文)](/faq): Common questions on data sourcing, AI accuracy, platform coverage, and compliance.
+- [FAQ (English)](/en/faq): The same FAQ in English.
+- [Contact (中文)](/contact): Book an expert demo or send a custom inquiry.
+- [Contact (English)](/en/contact): Same contact form in English.
+
+## Featured articles
+
+- [Anker Social Listening: Growth, Trust & VOC Risk](/blog/consumer-electronics-social-listening-anker-growth-trust-voc-risk): 30-day public social conversation snapshot for Anker — demand formation, sentiment shifts, recurring VOC issues, and early trust-risk signals.
+- [消费电子 Social Listening：Anker 的信任压力与 VOC 风险](/blog/consumer-electronics-social-listening-anker-datascaler-cn): 上文中文版，拆解 Anker 30 天公开社交讨论中的信任压力、平台分化与 VOC 风险。
+
+## Optional
+
+- [Terms of Service (中文)](/terms)
+- [Terms of Service (English)](/en/terms)
+- [Privacy Policy (中文)](/privacy)
+- [Privacy Policy (English)](/en/privacy)

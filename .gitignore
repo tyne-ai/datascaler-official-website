@@ -1,0 +1,19 @@
+# deps & build
+node_modules/
+.next/
+out/
+dist/
+# generated
+*.tsbuildinfo
+next-env.d.ts
+dev.log
+.DS_Store
+__MACOSX/
+# env & secrets
+.env
+.env.*
+# vercel
+.vercel
+
+# CMS local DB (contains admin user) — not for public repo
+payload.db
