@@ -17,7 +17,7 @@ const CLARITY_PROJECT_ID = 'x04rt4ltvq';
 // 经 dataLayer 触发）。GA4 基础 pageview 仍由上面的 gtag.js 负责——GTM 内只配 GA4「事件」代码、
 // 不要再加 GA4「配置」代码，否则 pageview 会重复计数。
 // TODO(growth): 替换为真实 GTM 容器 ID（GTM 后台 → 容器设置）。
-const GTM_CONTAINER_ID = 'GTM-XXXXXXX';
+const GTM_CONTAINER_ID = 'GTM-KVXS5X93';
 
 const ENABLE_ANALYTICS = process.env.NODE_ENV === 'production';
 

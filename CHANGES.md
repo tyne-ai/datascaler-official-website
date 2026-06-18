@@ -34,7 +34,7 @@ PAYLOAD_SECRET=demo-secret-123 DATABASE_URI=file:./payload.db NEXT_PUBLIC_SITE_U
 - 字体：标题 Space Grotesk → Inter；补中文兜底栈（`globals.css`、`tailwind.config.ts`）
 
 ## 四、数据埋点（方案 A：GTM）
-- `app/(frontend)/layout.tsx`：装 GTM 容器（占位 `GTM-XXXXXXX`，待换真实 ID）；保留 gtag.js 管 GA4 pageview，GTM 只配 GA4 事件代码
+- `app/(frontend)/layout.tsx`：装 GTM 容器（`GTM-KVXS5X93`）；保留 gtag.js 管 GA4 pageview，GTM 只配 GA4 事件代码
 - `track(event, params)` helper + `data-cta` / `data-plan` 属性已预埋
 - 已埋事件：`sign_up_click`(Hero)、`plan_click`(定价卡)、`demo_cta_click`(Hero 次级)
 - 待研发补：`demo_request_submit`、`hero_brand_search`，以及 nav/FAQ/footer 的 `sign_up_click`
