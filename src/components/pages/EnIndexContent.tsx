@@ -1,6 +1,6 @@
 'use client';
 import { useState, Fragment } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { DemoDialog } from "@/components/DemoDialog";
 import { PricingHeader } from "@/components/PricingHeader";
 import { PricingFooter } from "@/components/PricingFooter";
@@ -53,12 +53,12 @@ function HeroSearchInput() {
   return (
     <motion.div variants={fadeUp} custom={3} className="w-full max-w-lg">
       <div className="group relative">
-        <div className="absolute -inset-1.5 rounded-xl bg-gradient-to-r from-primary/30 to-accent/30 breathing-glow blur-lg" />
+        <div className="absolute -inset-1 rounded-xl bg-ring/15 blur-md transition-opacity duration-300 group-focus-within:bg-ring/25" />
         <div className="relative flex items-center gap-2 rounded-xl border border-border/50 bg-card/60 backdrop-blur-md p-2">
           <Search className="ml-3 h-5 w-5 text-muted-foreground" />
           <Input
             aria-label="Brand domain search"
-            className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/40 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="Enter your brand domain..."
           />
           <a
@@ -69,25 +69,11 @@ function HeroSearchInput() {
             onClick={() => track("sign_up_click", { button_location: "hero", cta_type: "free_report" })}
           >
             <Button size="sm" className="shrink-0 bg-primary text-primary-foreground font-semibold hover:bg-primary/80 glow-primary">
-              Get started
+              Try it on my brand →
             </Button>
           </a>
         </div>
       </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        Free to start · Every insight backed by a traceable source
-      </p>
-      <p className="mt-2 text-center text-xs text-muted-foreground/80">
-        Buying for a team?{" "}
-        <a
-          href="/en/contact"
-          className="font-medium text-ring hover:text-ring/80 underline-offset-2 hover:underline"
-          data-cta="hero_book_demo"
-          onClick={() => track("demo_cta_click", { button_location: "hero" })}
-        >
-          Book a demo →
-        </a>
-      </p>
     </motion.div>
   );
 }
@@ -95,14 +81,10 @@ function HeroSearchInput() {
 // ─── Hero ────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden px-6 py-40">
-      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
-      <div className="pointer-events-none absolute inset-0 radial-glow opacity-50" />
+    <section className="relative flex flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-20">
+      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-20" />
       <div className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[600px] w-[600px] rounded-full bg-ring/20 blur-[140px]" />
-      </div>
-      <div className="pointer-events-none absolute right-1/4 top-1/4">
-        <div className="h-[400px] w-[400px] rounded-full bg-accent/10 blur-[120px]" />
+        <div className="h-[600px] w-[600px] rounded-full bg-ring/15 blur-[140px]" />
       </div>
 
       <motion.div
@@ -123,20 +105,37 @@ function Hero() {
           custom={1}
           className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
         >
-          See brand signals through your customers' eyes —
+          AI brand intelligence
           <br className="mb-3" />
-          <span className="text-gradient mt-3 inline-block">and find growth opportunities you can verify.</span>
+          that <span className="text-gradient mt-3 inline-block">shows its work.</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} custom={2} className="mt-5 max-w-2xl text-base leading-relaxed text-secondary-foreground md:text-lg md:leading-relaxed">
-          Capture signals across major platforms from a consumer perspective, reduce noise, and back every insight with traceable sources and metrics — so you can turn insights into executable growth actions.
+          Across 9 public platforms — YouTube, TikTok, X, Facebook, Instagram, and more. Choose your own cadence. Every line links back to the original post.
         </motion.p>
 
-        <div className="mt-12">
+        <div className="mt-10">
           <HeroSearchInput />
         </div>
 
-        <motion.div variants={fadeUp} custom={4} className="mt-16 w-full max-w-3xl">
+        {/* Platform Strip — all 9 sources surfaced in the hero */}
+        <motion.div variants={fadeUp} custom={4} className="mt-8 w-full max-w-3xl">
+          <div className="mb-3 text-center text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
+            Sources · 9 public platforms
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {PLATFORMS.map((name) => (
+              <span
+                key={name}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border/50 bg-card/60 backdrop-blur-sm px-3 py-1.5 text-xs text-foreground"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div variants={fadeUp} custom={5} className="mt-12 w-full max-w-3xl">
           <HeroBriefPanel />
         </motion.div>
       </motion.div>
@@ -147,31 +146,22 @@ function Hero() {
 // ─── Pain Points ─────────────────────────────────────────
 const painPoints = [
   {
-    icon: Box,
-    title: "Trust gap (Black box)",
-    desc: "Conclusions without sources aren't verifiable — teams won't bet decisions on a black box.",
-    color: "text-destructive",
-    iconBg: "bg-destructive/10",
+    quote: "Where did this number come from?",
+    desc: "It's the first question every CMO asks. Most AI tools don't have an answer. We link every claim back to the post it came from — so when someone asks, you've got it.",
   },
   {
-    icon: Timer,
-    title: "Timeliness gap (Value gap)",
-    desc: "Dashboards summarize the past — the market moves faster. You miss the early window that matters.",
-    color: "text-primary",
-    iconBg: "bg-primary/10",
+    quote: "Either too shallow, or the wrong cadence.",
+    desc: "Other tools come with one setting and no knob. We let you tune the depth — one page to ten — and the cadence, to match your brand and budget.",
   },
   {
-    icon: Unlink,
-    title: "Attribution dead‑end (Analysis dead‑end)",
-    desc: "You see what changed, but not why — and insights don't translate into next actions.",
-    color: "text-accent",
-    iconBg: "bg-accent/10",
+    quote: "Ratings dropped. We don't know why.",
+    desc: "We do. We surface the exact review, creator, or thread moving the needle — and we link straight to it.",
   },
 ];
 
 function PainPoints() {
   return (
-    <section className="relative py-16 px-6">
+    <section className="relative py-24 px-6">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial="hidden"
@@ -180,12 +170,11 @@ function PainPoints() {
           variants={stagger}
           className="text-center"
         >
-          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-            Three reasons brand teams don't trust
-            <span className="text-gradient"> AI insights</span>
+          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
+            Stop paying for AI you can't defend.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Stop paying for vague AI text. What you need is <span className="text-foreground font-medium">decision‑grade evidence.</span>
+            Evidence you can actually point to when someone asks where it came from.
           </motion.p>
         </motion.div>
 
@@ -198,16 +187,14 @@ function PainPoints() {
         >
           {painPoints.map((p, i) => (
             <motion.div
-              key={p.title}
+              key={p.quote}
               variants={fadeUp}
               custom={i}
-              className="group glass-card rounded-2xl p-8 transition-all duration-300 hover:border-ring/50 hover:shadow-lg hover:shadow-ring/10 hover-lift"
+              className="rounded-2xl border border-border/50 bg-card/30 p-8"
             >
-              <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl ${p.iconBg}`}>
-                <p.icon className={`h-6 w-6 ${p.color}`} />
-              </div>
-              <h3 className="font-display text-lg font-semibold text-foreground">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <div className="mb-3 font-serif text-4xl leading-none text-ring opacity-60">"</div>
+              <h3 className="font-display text-lg font-semibold text-foreground leading-snug">{p.quote}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -219,7 +206,7 @@ function PainPoints() {
 // ─── Section 3: Core Brief & Evidence ────────────────────
 function CoreBrief() {
   return (
-    <section className="relative py-16 px-6">
+    <section className="relative py-24 px-6">
       <div className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-accent/5 blur-[120px]" />
       <div className="container mx-auto max-w-6xl">
         <motion.div
@@ -229,9 +216,8 @@ function CoreBrief() {
           variants={stagger}
           className="text-center"
         >
-          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-            Reimagined workflow:
-            <span className="text-gradient"> conclusions first, evidence on demand</span>
+          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
+            Reimagined workflow: conclusions first, evidence on demand
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             AI insight brief + a transparent evidence chain: click [Ref] to trace back to original posts.
@@ -283,7 +269,7 @@ function CoreBrief() {
 // ─── Section 4: Competitor Intel ─────────────────────────
 function CompetitorIntel() {
   return (
-    <section className="relative py-32 px-6">
+    <section className="relative py-24 px-6">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="h-[600px] rounded-full bg-ring/8 blur-[160px]" />
       </div>
@@ -301,9 +287,8 @@ function CompetitorIntel() {
               Competitive Intelligence
             </span>
           </motion.div>
-          <motion.h2 variants={fadeUp} custom={1} className="font-display text-3xl font-bold md:text-5xl" style={{ color: "#F8FAFC" }}>
-            Detect competitor moves across channels —
-            <span className="text-gradient"> diagnose cross‑platform gaps in one click</span>
+          <motion.h2 variants={fadeUp} custom={1} className="font-display text-3xl font-bold md:text-4xl" style={{ color: "#F8FAFC" }}>
+            Detect competitor moves across channels — diagnose cross‑platform gaps in one click
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             The assistant surfaces competitor momentum, risks, and opportunities from public signals — so teams can react early and plan decisively.
@@ -339,13 +324,46 @@ function CopilotSection() {
           variants={stagger}
           className="text-center"
         >
-          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-            Go from competitor intel to growth actions —
-            <span className="text-gradient"> fast</span>
+          <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
+            From "what just happened" to "what to do about it," in seconds.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            A context‑aware assistant turns insights into a prioritized plan — with supporting evidence linked for every recommendation.
+            A screen-aware assistant traces every change to its cause in real time, and turns it into a prioritized Action Board.
           </motion.p>
+        </motion.div>
+
+        {/* Example questions — 5 typical scenarios global teams ask */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="mt-12 mx-auto max-w-5xl"
+        >
+          <motion.p variants={fadeUp} className="text-center text-xs text-muted-foreground mb-6">
+            Try asking · Real questions global teams bring in every week
+          </motion.p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { tag: "Creator discovery", q: "“Find me 5 Instagram creators worth partnering with this month.”" },
+              { tag: "Issue attribution", q: "“Negative Amazon reviews spiked last week — what's driving it?”" },
+              { tag: "Competitive intel", q: "“Which competitor are customers comparing us to most on Reddit?”" },
+              { tag: "Launch feedback", q: "“Our new launch is one week in — what are customers loving and hating most?”" },
+              { tag: "Response triage", q: "“There's a Reddit thread building about us — worth responding? How big is the impact?”" },
+            ].map((ex, i) => (
+              <motion.div
+                key={ex.tag}
+                variants={fadeUp}
+                custom={i}
+                className="glass-card rounded-xl p-5 text-sm flex-1 basis-[280px] max-w-[340px]"
+              >
+                <div className="text-[10px] uppercase tracking-wider text-ring font-semibold mb-2">
+                  {ex.tag}
+                </div>
+                <div className="leading-relaxed text-secondary-foreground">{ex.q}</div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
@@ -464,9 +482,8 @@ function PricingSection() {
               Pricing
             </span>
           </motion.div>
-          <motion.h2 variants={fadeUp} custom={1} className="mt-6 font-display text-3xl font-bold text-foreground md:text-5xl">
-            Simple, transparent
-            <span className="text-gradient"> pricing</span>
+          <motion.h2 variants={fadeUp} custom={1} className="mt-6 font-display text-3xl font-bold text-foreground md:text-4xl">
+            Simple, transparent pricing
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Pick a plan → Need more → Top up Credits
@@ -611,9 +628,8 @@ function PricingSection() {
 // ─── Social Proof ────────────────────────────────────────
 const proofStats = [
   { value: "200+", label: "Brands" },
-  { value: "8", label: "Platforms covered" },
-  { value: "100%", label: "Traceable insights" },
-  { value: "Free", label: "No card to start" },
+  { value: "9", label: "Public platforms" },
+  { value: "100%", label: "Every claim, sourced" },
 ];
 
 const proofQuotes = [
@@ -639,7 +655,7 @@ const proofQuotes = [
 
 function SocialProof() {
   return (
-    <section className="relative px-6 py-20">
+    <section className="relative px-6 py-24">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-card/30 to-transparent" />
       <motion.div
         initial="hidden"
@@ -649,12 +665,11 @@ function SocialProof() {
         className="relative z-10 mx-auto max-w-6xl"
       >
         <motion.h2 variants={fadeUp} className="text-center font-display text-2xl font-bold text-foreground md:text-4xl">
-          Trusted by global brands to
-          <span className="text-gradient"> see what their customers see</span>
+          Trusted by global brands to see what their customers see
         </motion.h2>
 
         {/* Stats */}
-        <motion.div variants={fadeUp} custom={1} className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <motion.div variants={fadeUp} custom={1} className="mt-10 grid grid-cols-3 gap-4">
           {proofStats.map((s) => (
             <div key={s.label} className="glass-card rounded-2xl p-6 text-center">
               <div className="font-display text-3xl font-bold text-primary md:text-4xl">{s.value}</div>
@@ -702,24 +717,19 @@ function FooterCTA() {
         className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-          From guesswork to proof
-          <br />
-          <span className="text-gradient">make every decision defensible.</span>
+          Make every decision <span className="text-gradient">one you can defend.</span>
         </motion.h2>
-        <motion.p variants={fadeUp} custom={1} className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground">
-          Get started with DataScaler's brand intelligence platform today.
-        </motion.p>
-        <motion.div variants={fadeUp} custom={2} className="mt-8">
+        <motion.div variants={fadeUp} custom={1} className="mt-10">
           <a href="https://app.datascaler.ai/plans" target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               className="glow-primary bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/80"
             >
-              Get started
+              Try it on my brand →
             </Button>
           </a>
         </motion.div>
-        <motion.p variants={fadeUp} custom={3} className="mt-6 text-xs text-muted-foreground/60">
+        <motion.p variants={fadeUp} custom={3} className="mt-6 text-xs text-muted-foreground/80">
           Built on publicly available signals. No account linking required — compliant and secure.
         </motion.p>
       </motion.div>
@@ -727,20 +737,35 @@ function FooterCTA() {
   );
 }
 
+// ─── Platform Strip ──────────────────────────────────────
+const PLATFORMS = [
+  "YouTube",
+  "TikTok",
+  "X",
+  "Facebook",
+  "Instagram",
+  "Pinterest",
+  "Trustpilot",
+  "Reddit",
+  "Amazon Reviews",
+];
+
 // ─── Page ───────────────────────────────────────────────
 export function EnIndexContent() {
   return (
-    <div className="min-h-screen bg-background">
-      <PricingHeader />
-      <Hero />
-      <PainPoints />
-      <CoreBrief />
-      <CompetitorIntel />
-      <CopilotSection />
-      <SocialProof />
-      <div id="pricing"><PricingSection /></div>
-      <FooterCTA />
-      <PricingFooter />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-background">
+        <PricingHeader />
+        <Hero />
+        <PainPoints />
+        <CoreBrief />
+        <CompetitorIntel />
+        <CopilotSection />
+        <SocialProof />
+        <div id="pricing"><PricingSection /></div>
+        <FooterCTA />
+        <PricingFooter />
+      </div>
+    </MotionConfig>
   );
 }

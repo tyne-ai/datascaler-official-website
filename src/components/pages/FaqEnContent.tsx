@@ -19,6 +19,10 @@ const sections = [
     title: "Product & Trust",
     items: [
       {
+        q: "Why not just use a general-purpose LLM?",
+        a: "A general LLM answers from what it read during training — not from what people are actually saying right now. We pull from 9 public platforms on the cadence you set.\n\nA general LLM can't tell you where the answer came from. We link every claim back to the original post.\n\nA general LLM is a one-off chat. We give you a structured report, plus an auto-prioritized action board.",
+      },
+      {
         q: "How does DataScaler collect its data? Why not just use official APIs?",
         a: 'We utilize a proprietary "Global Traffic Perception" logic that simulates real user search behavior. Unlike restrictive official APIs, our method captures the actual exposure results seen by consumers, including post details and interaction signals that APIs often miss, providing a truer reflection of market reality.',
       },
