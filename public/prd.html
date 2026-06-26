@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anker × Seel AI 智能客服组件 — 产品需求文档 v1.0</title>
+<style>
+  :root {
+    --anker: #0066CC;
+    --seel:  #7C3AED;
+    --dark:  #1E293B;
+    --mid:   #475569;
+    --border:#E2E8F0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    font-size: 15px; line-height: 1.75; color: var(--dark);
+    background: #F8FAFC;
+  }
+
+  /* ── 顶部栏 ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: #fff; border-bottom: 1px solid var(--border);
+    padding: 0 40px; height: 56px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .topbar-brand { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .topbar-brand .a { color: var(--anker); }
+  .topbar-brand .x { color: var(--mid); font-weight: 400; }
+  .topbar-brand .s { color: var(--seel); }
+  .topbar-tag {
+    font-size: 11px; font-weight: 600;
+    background: #FEF3C7; color: #92400E;
+    padding: 2px 8px; border-radius: 99px;
+  }
+  .topbar-nav { margin-left: auto; display: flex; gap: 4px; }
+  .topbar-nav a {
+    font-size: 13px; color: var(--mid); text-decoration: none;
+    padding: 5px 12px; border-radius: 6px; font-weight: 500;
+    transition: background .15s, color .15s;
+  }
+  .topbar-nav a:hover { background: #F1F5F9; color: var(--dark); }
+  .topbar-nav a.active { background: #EFF6FF; color: var(--anker); font-weight: 600; }
+
+  /* ── 布局 ── */
+  .layout { display: flex; max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── 侧边栏 ── */
+  .sidebar {
+    width: 210px; flex-shrink: 0; position: sticky; top: 56px;
+    height: calc(100vh - 56px); overflow-y: auto; padding: 32px 0;
+  }
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .nav-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--mid); padding: 0 16px 8px; text-transform: uppercase; }
+  .nav-link {
+    display: block; padding: 5px 16px; font-size: 13px; color: var(--mid);
+    text-decoration: none; border-left: 2px solid transparent;
+    transition: all .15s; line-height: 1.5;
+  }
+  .nav-link:hover { color: var(--anker); border-left-color: var(--anker); background: #EFF6FF; }
+  .nav-link.active { color: var(--anker); border-left-color: var(--anker); font-weight: 600; background: #EFF6FF; }
+  .nav-sub { padding-left: 28px; font-size: 12.5px; }
+
+  /* ── 主内容 ── */
+  .main { flex: 1; min-width: 0; padding: 40px 0 80px 48px; }
+
+  /* ── 封面 ── */
+  .cover {
+    background: linear-gradient(135deg, #0A1628 0%, #1a2744 50%, #2D1D6B 100%);
+    border-radius: 16px; padding: 64px 56px; margin-bottom: 56px;
+    color: #fff; position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(124,58,237,.25) 0%, transparent 60%);
+  }
+  .cover-badge {
+    position: relative;
+    display: inline-block; font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.85); padding: 4px 12px; border-radius: 99px; margin-bottom: 28px;
+  }
+  .cover-title { position: relative; font-size: 42px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 8px; }
+  .cover-title .a { color: #60A5FA; }
+  .cover-title .x { color: rgba(255,255,255,.4); font-weight: 300; margin: 0 4px; }
+  .cover-title .s { color: #C4B5FD; }
+  .cover-sub { position: relative; font-size: 19px; color: rgba(255,255,255,.7); margin-bottom: 36px; }
+  .cover-meta { position: relative; display: flex; gap: 32px; flex-wrap: wrap; }
+  .cover-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .cover-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+  .cover-meta-value { font-size: 15px; font-weight: 600; color: #fff; }
+
+  /* ── 章节 ── */
+  .section { margin-bottom: 56px; scroll-margin-top: 76px; }
+  .section-title {
+    font-size: 24px; font-weight: 700; color: var(--dark);
+    padding-bottom: 12px; border-bottom: 2px solid var(--border);
+    margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-num {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--anker);
+    color: #fff; font-size: 14px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .subsection { margin: 28px 0; }
+  .subsection-title { font-size: 17px; font-weight: 700; color: var(--anker); margin-bottom: 14px; }
+  .sub2-title { font-size: 15px; font-weight: 700; color: var(--dark); margin: 20px 0 10px; }
+
+  p { color: var(--mid); line-height: 1.8; margin-bottom: 12px; }
+
+  /* ── 表格 ── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0 24px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: var(--anker); color: #fff; text-align: left;
+    padding: 10px 16px; font-weight: 600; font-size: 13px;
+  }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child  { border-radius: 0 8px 0 0; }
+  td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--dark); vertical-align: top; line-height: 1.6; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #F8FAFC; }
+  td strong { color: var(--dark); }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px;
+    border-radius: 99px; margin-right: 4px;
+  }
+  .tag-blue   { background: #DBEAFE; color: #1D4ED8; }
+  .tag-purple { background: #EDE9FE; color: #6D28D9; }
+  .tag-green  { background: #DCFCE7; color: #15803D; }
+  .tag-orange { background: #FEF3C7; color: #92400E; }
+  .tag-red    { background: #FEE2E2; color: #DC2626; }
+  .prio-1   { font-weight: 700; color: #DC2626; }
+  .prio-low { color: var(--mid); }
+
+  /* ── 提示框 ── */
+  .callout {
+    background: #F5F3FF; border-left: 4px solid var(--seel);
+    border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0 24px;
+    font-size: 13.5px; line-height: 1.7; color: var(--dark);
+  }
+  .callout code {
+    display: block; font-family: 'SF Mono', 'Fira Mono', monospace;
+    font-size: 12.5px; color: var(--seel); margin-top: 8px; word-break: break-all;
+    background: rgba(124,58,237,.07); padding: 6px 10px; border-radius: 4px;
+  }
+
+  /* ── 列表 ── */
+  ul.prd-list, ol.prd-list { padding-left: 0; margin: 10px 0 16px; list-style: none; }
+  ul.prd-list li, ol.prd-list li {
+    position: relative; padding: 5px 0 5px 22px; font-size: 14px; color: var(--mid); line-height: 1.7;
+    counter-increment: prd-counter;
+  }
+  ul.prd-list li::before { content: '•'; position: absolute; left: 6px; color: var(--anker); font-weight: 700; }
+  ol.prd-list { counter-reset: prd-counter; }
+  ol.prd-list li::before { content: counter(prd-counter) '.'; position: absolute; left: 0; color: var(--anker); font-weight: 700; font-size: 13px; }
+
+  /* ── 快捷芯片 ── */
+  .chip-groups { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0 20px; }
+  .chip-group { flex: 1; min-width: 240px; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .chip-group-label { font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+  .chip-group.blue .chip-group-label { color: var(--anker); }
+  .chip-group.purple .chip-group-label { color: var(--seel); }
+  .chip-group .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12.5px; padding: 4px 10px; border-radius: 99px; font-weight: 500; }
+  .chip.blue { background: #DBEAFE; color: #1D4ED8; }
+  .chip.purple { background: #EDE9FE; color: #6D28D9; }
+
+  /* ── 意图识别补充说明 ── */
+  .intent-explain {
+    border: 1px solid #E0D9FB; border-radius: 10px;
+    overflow: hidden; margin: 16px 0 24px;
+  }
+  .intent-explain-title {
+    background: #F5F3FF; padding: 10px 18px;
+    font-size: 13px; font-weight: 700; color: var(--seel);
+    border-bottom: 1px solid #E0D9FB;
+  }
+  .intent-explain-body { padding: 18px 20px; }
+  .intent-explain-body > p { font-size: 13.5px; color: var(--dark); }
+  .intent-rules { display: flex; flex-direction: column; gap: 12px; }
+  .intent-rule { display: flex; gap: 12px; align-items: flex-start; }
+  .intent-rule-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .intent-rule-icon.red    { background: #FEE2E2; color: #DC2626; }
+  .intent-rule-icon.orange { background: #FEF3C7; color: #92400E; }
+  .intent-rule-icon.blue   { background: #DBEAFE; color: #1D4ED8; }
+  .intent-rule-text { font-size: 13px; color: var(--mid); line-height: 1.7; }
+  .intent-rule-text strong { color: var(--dark); }
+
+  /* ── 流程图 ── */
+  .diagram-wrap { margin: 20px 0 32px; overflow-x: auto; }
+  .diagram-wrap svg { display: block; max-width: 100%; height: auto; }
+
+  /* ── 泳道图 ── */
+  .swimlane { margin: 20px 0 32px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; font-size: 13px; }
+  .swimlane-header { display: grid; grid-template-columns: 130px 1fr 1fr 1fr; background: var(--dark); color: #fff; }
+  .swimlane-header > div { padding: 10px 14px; font-weight: 700; font-size: 12px; letter-spacing: .04em; border-right: 1px solid rgba(255,255,255,.1); }
+  .swimlane-header > div:last-child { border-right: none; }
+  .swimlane-row { display: grid; grid-template-columns: 130px 1fr 1fr 1fr; border-top: 1px solid var(--border); min-height: 56px; }
+  .swimlane-row:nth-child(even) .swimlane-cell { background: #F8FAFC; }
+  .swimlane-step { padding: 10px 14px; border-right: 1px solid var(--border); background: #F0F9FF; font-weight: 700; font-size: 12px; color: #0369A1; display: flex; align-items: center; }
+  .swimlane-cell { padding: 10px 14px; border-right: 1px solid var(--border); color: var(--mid); line-height: 1.55; font-size: 12.5px; display: flex; align-items: center; }
+  .swimlane-cell:last-child { border-right: none; }
+  .swimlane-cell code { font-family: 'SF Mono','Fira Mono',monospace; font-size: 11.5px; background: rgba(124,58,237,.08); color: var(--seel); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+  .swimlane-cell .arrow-right { color: #94A3B8; margin: 0 4px; }
+  .field-pill { display: inline-block; font-size: 11px; background: #DBEAFE; color: #1D4ED8; padding: 1px 6px; border-radius: 99px; margin: 1px 2px; font-family: 'SF Mono','Fira Mono',monospace; white-space: nowrap; }
+  .field-pill.purple { background: #EDE9FE; color: #6D28D9; }
+  .field-pill.green  { background: #DCFCE7; color: #15803D; }
+
+  /* ── 回到顶部 ── */
+  #btt {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--anker); color: #fff; border: none;
+    font-size: 18px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,102,204,.35);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .2s;
+  }
+  #btt:hover { transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 0 60px; }
+    .topbar { padding: 0 16px; }
+    .cover { padding: 36px 24px; }
+    .cover-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <span class="a">ANKER</span><span class="x">×</span><span class="s">seel</span>
+  </div>
+  <span class="topbar-tag">PRD v1.0</span>
+  <nav class="topbar-nav">
+    <a href="hub.html">总览</a>
+    <a href="prd.html" class="active">PRD</a>
+    <a href="tech.html">技术方案</a>
+    <a href="anker_seel_api_demo_v2.html">Demo</a>
+  </nav>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div style="margin-bottom:24px">
+      <div class="nav-label">目录</div>
+      <a class="nav-link active" href="#overview">1. 项目概述</a>
+      <a class="nav-link nav-sub" href="#value">1.1 核心价值</a>
+      <a class="nav-link" href="#stories">2. 用户故事</a>
+      <a class="nav-link" href="#diagrams">3. 系统流程与数据传递</a>
+      <a class="nav-link nav-sub" href="#state-machine">3.1 状态机</a>
+      <a class="nav-link nav-sub" href="#data-flow">3.2 字段传递流程</a>
+      <a class="nav-link" href="#functional">4. 功能需求</a>
+      <a class="nav-link nav-sub" href="#two-mode">4.1 双模式流程</a>
+      <a class="nav-link nav-sub" href="#intent">4.2 意图识别</a>
+      <a class="nav-link nav-sub" href="#claim-flow">4.3 理赔流程</a>
+      <a class="nav-link nav-sub" href="#data">4.4 数据传递</a>
+      <a class="nav-link nav-sub" href="#chips">4.5 快捷芯片</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- 封面 -->
+    <div class="cover">
+      <div class="cover-badge">产品需求文档</div>
+      <div class="cover-title">
+        <span class="a">ANKER</span><span class="x">×</span><span class="s">SEEL</span>
+      </div>
+      <div class="cover-sub">AI 智能客服集成方案</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><span class="cover-meta-label">版本</span><span class="cover-meta-value">v1.0</span></div>
+        <div class="cover-meta-item"><span class="cover-meta-label">日期</span><span class="cover-meta-value">2026年5月</span></div>
+        <div class="cover-meta-item"><span class="cover-meta-label">状态</span><span class="cover-meta-value">草稿</span></div>
+        <div class="cover-meta-item"><span class="cover-meta-label">保密级别</span><span class="cover-meta-value">机密</span></div>
+      </div>
+    </div>
+
+    <!-- 1. 项目概述 -->
+    <div class="section" id="overview">
+      <div class="section-title"><span class="section-num">1</span> 项目概述</div>
+      <p>Anker × Seel AI 智能客服组件是 Anker 官网内的智能客服对话界面。当客户咨询涉及 Seel 包裹保障相关内容时，组件调用 Seel 接口获取回答，或在需要发起理赔时，携带订单数据引导用户跳转至 Seel 理赔中心（RC）。</p>
+      <p>识别到 Seel 相关意图后，自动路由至两种模式：<strong>咨询模式</strong>——调用 Seel 接口，直接在聊天框内回答保障政策问题；<strong>理赔模式</strong>——核验客户保单后，跳转至 Seel RC 并自动预填表单，消除手动录入。</p>
+
+      <div class="subsection" id="value">
+        <div class="subsection-title">1.1 核心价值</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:140px">利益相关方</th><th>核心收益</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Anker</strong></td><td>自动处理重复性 Seel 客服问题，降低人工坐席工作量与运营成本</td></tr>
+              <tr><td><strong>Seel</strong></td><td>提升 RC 曝光率，在客户最需要时呈现保障价值</td></tr>
+              <tr><td><strong>用户</strong></td><td>即时获取准确答案，无需致电客服；秒级完成理赔发起，零手动录入</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 用户故事 -->
+    <div class="section" id="stories">
+      <div class="section-title"><span class="section-num">2</span> 用户故事</div>
+      <div class="subsection">
+        <div class="subsection-title">3.1 消费者故事</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:70px">编号</th><th>用户故事</th><th>验收标准</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>US-01</strong></td>
+                <td>作为消费者，我希望知道我的订单是否受 Seel 保障，以便了解我的权益。</td>
+                <td>机器人在 2 秒内确认保障状态、保单号及保障类型。</td>
+              </tr>
+              <tr>
+                <td><strong>US-02</strong></td>
+                <td>作为消费者，我希望了解 Seel 保什么、不保什么，以便设定合理预期。</td>
+                <td>机器人准确列举保障事项（丢失、盗窃、损坏、延误）及免责条款。</td>
+              </tr>
+              <tr>
+                <td><strong>US-03</strong></td>
+                <td>作为消费者，我希望了解 Seel 保障的有效期限。</td>
+                <td>机器人告知保障窗口：购买日起至预计送达日后 30 天。</td>
+              </tr>
+              <tr>
+                <td><strong>US-04</strong></td>
+                <td>作为消费者，我希望对丢失、损坏或延误的包裹便捷发起理赔。</td>
+                <td>机器人跳转 RC 并自动预填邮箱与订单号，无需手动录入。</td>
+              </tr>
+              <tr>
+                <td><strong>US-05</strong></td>
+                <td>作为消费者，我希望了解理赔的处理时效。</td>
+                <td>机器人告知：24小时审核 → 24–48小时审批 → 3–5个工作日结案。</td>
+              </tr>
+              <tr>
+                <td><strong>US-06</strong></td>
+                <td>作为消费者，我希望查询已提交理赔的处理进度。</td>
+                <td>机器人说明在 resolve.seel.com 查询的方式，并确认邮件通知节点。</td>
+              </tr>
+              <tr>
+                <td><strong>US-07</strong></td>
+                <td>作为消费者，我希望知道理赔结果是退款还是补发商品。</td>
+                <td>机器人说明审批通过后两种方式均可选择，由消费者决定。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="subsection">
+        <div class="subsection-title">3.2 商家 / 内部故事</div>
+        <ul class="prd-list">
+          <li>作为 Anker 客服负责人，我希望重复性 Seel 问答由 AI 自动处理，让坐席专注于复杂问题。</li>
+          <li>作为 Seel 运营负责人，我希望客户被引导至 RC 时订单数据已预填，提升理赔完成率。</li>
+          <li>作为产品团队，我希望 v1 以轻量嵌入方式交付，不依赖额外后端基础设施。</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- 3. 系统流程与数据传递 -->
+    <div class="section" id="diagrams">
+      <div class="section-title"><span class="section-num">3</span> 系统流程与数据传递</div>
+
+      <!-- 3.1 状态机 -->
+      <div class="subsection" id="state-machine">
+        <div class="subsection-title">3.1 系统状态机</div>
+        <p>下图展示 Anker 客服组件从接收消息到最终完成的完整状态转移过程，涵盖意图判断分叉、咨询异步轮询与理赔 RC 跳转两条主路径。</p>
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 820 560" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif">
+            <!-- defs -->
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#64748B"/>
+              </marker>
+              <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#0066CC"/>
+              </marker>
+              <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#7C3AED"/>
+              </marker>
+            </defs>
+
+            <!-- ── 起始节点 ── -->
+            <circle cx="410" cy="32" r="16" fill="#1E293B"/>
+            <text x="410" y="37" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">S</text>
+
+            <!-- arrow start → 接收消息 -->
+            <line x1="410" y1="48" x2="410" y2="74" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr)"/>
+
+            <!-- 接收消息 -->
+            <rect x="300" y="76" width="220" height="44" rx="8" fill="#0066CC"/>
+            <text x="410" y="102" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="600">接收用户消息</text>
+
+            <!-- arrow → 意图识别 -->
+            <line x1="410" y1="120" x2="410" y2="148" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr)"/>
+
+            <!-- 意图识别 菱形 -->
+            <polygon points="410,150 520,195 410,240 300,195" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+            <text x="410" y="190" text-anchor="middle" fill="#1E293B" font-size="13" font-weight="700">意图识别</text>
+            <text x="410" y="207" text-anchor="middle" fill="#475569" font-size="11">Seel 相关？</text>
+
+            <!-- 左分支标签 咨询 -->
+            <line x1="300" y1="195" x2="170" y2="195" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="170" y1="195" x2="170" y2="282" stroke="#0066CC" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+            <text x="230" y="186" text-anchor="middle" fill="#0066CC" font-size="11.5" font-weight="600">咨询意图</text>
+
+            <!-- 右分支标签 理赔 -->
+            <line x1="520" y1="195" x2="640" y2="195" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="640" y1="195" x2="640" y2="282" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+            <text x="582" y="186" text-anchor="middle" fill="#7C3AED" font-size="11.5" font-weight="600">理赔意图</text>
+
+            <!-- 非 Seel 向下 -->
+            <line x1="410" y1="240" x2="410" y2="500" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+            <text x="418" y="385" fill="#94A3B8" font-size="11">非 Seel</text>
+            <text x="418" y="398" fill="#94A3B8" font-size="11">转人工 /</text>
+            <text x="418" y="411" fill="#94A3B8" font-size="11">常规回复</text>
+
+            <!-- ── 咨询路径 (蓝色左侧) ── -->
+            <!-- 调用 API -->
+            <rect x="60" y="284" width="220" height="44" rx="8" fill="#EFF6FF" stroke="#0066CC" stroke-width="1.5"/>
+            <text x="170" y="304" text-anchor="middle" fill="#0066CC" font-size="12" font-weight="600">POST /api/chat/messages</text>
+            <text x="170" y="320" text-anchor="middle" fill="#475569" font-size="11">发送用户消息</text>
+
+            <line x1="170" y1="328" x2="170" y2="356" stroke="#0066CC" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+            <!-- 轮询 -->
+            <rect x="60" y="358" width="220" height="52" rx="8" fill="#EFF6FF" stroke="#0066CC" stroke-width="1.5"/>
+            <text x="170" y="378" text-anchor="middle" fill="#0066CC" font-size="12" font-weight="600">POST /poll 轮询 AI 回复</text>
+            <text x="170" y="395" text-anchor="middle" fill="#475569" font-size="11">间隔 5 s，超时 3 min</text>
+
+            <!-- 轮询自环箭头 -->
+            <path d="M60,384 C20,384 20,420 60,410" stroke="#0066CC" stroke-width="1.5" fill="none" marker-end="url(#arr-blue)" stroke-dasharray="3,2"/>
+            <text x="10" y="403" fill="#0066CC" font-size="10.5">重试</text>
+
+            <line x1="170" y1="410" x2="170" y2="438" stroke="#0066CC" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+            <!-- 展示回复 -->
+            <rect x="60" y="440" width="220" height="44" rx="8" fill="#0066CC"/>
+            <text x="170" y="460" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">展示 AI 回复</text>
+            <text x="170" y="476" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="11">blocks[].content 渲染</text>
+
+            <!-- ── 理赔路径 (紫色右侧) ── -->
+            <!-- 核验保单 -->
+            <rect x="530" y="284" width="220" height="44" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+            <text x="640" y="304" text-anchor="middle" fill="#7C3AED" font-size="12" font-weight="600">核验 Seel 保单</text>
+            <text x="640" y="320" text-anchor="middle" fill="#475569" font-size="11">获取 policyId</text>
+
+            <line x1="640" y1="328" x2="640" y2="356" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+
+            <!-- 构建 RC 链接 -->
+            <rect x="530" y="358" width="220" height="44" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+            <text x="640" y="378" text-anchor="middle" fill="#7C3AED" font-size="12" font-weight="600">构建 RC 跳转链接</text>
+            <text x="640" y="395" text-anchor="middle" fill="#475569" font-size="11">email + order + policyId</text>
+
+            <line x1="640" y1="402" x2="640" y2="438" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+
+            <!-- 跳转 RC -->
+            <rect x="530" y="440" width="220" height="60" rx="8" fill="#7C3AED"/>
+            <text x="640" y="464" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">跳转 Seel RC</text>
+            <text x="640" y="480" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="11">resolve.seel.com</text>
+            <text x="640" y="495" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10.5">自动预填表单字段</text>
+
+            <!-- ── 汇聚终态 ── -->
+            <line x1="170" y1="484" x2="170" y2="520" stroke="#0066CC" stroke-width="1.5"/>
+            <line x1="170" y1="520" x2="388" y2="520" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="640" y1="500" x2="640" y2="520" stroke="#7C3AED" stroke-width="1.5"/>
+            <line x1="640" y1="520" x2="432" y2="520" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="410" y1="500" x2="410" y2="520" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="410" y1="520" x2="410" y2="536" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr)"/>
+
+            <!-- 终止节点 -->
+            <circle cx="410" cy="548" r="14" fill="#1E293B"/>
+            <circle cx="410" cy="548" r="9" fill="none" stroke="#fff" stroke-width="2.5"/>
+
+            <!-- 图例 -->
+            <rect x="60" y="8" width="12" height="12" rx="2" fill="#0066CC"/>
+            <text x="76" y="19" fill="#475569" font-size="11">咨询路径</text>
+            <rect x="150" y="8" width="12" height="12" rx="2" fill="#7C3AED"/>
+            <text x="166" y="19" fill="#475569" font-size="11">理赔路径</text>
+            <line x1="240" y1="14" x2="258" y2="14" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <text x="262" y="19" fill="#94A3B8" font-size="11">非 Seel 路径</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 3.2 字段传递流程 -->
+      <div class="subsection" id="data-flow">
+        <div class="subsection-title">3.2 字段传递与系统交互流程</div>
+        <p>下表以泳道形式展示各步骤中 Anker Widget、Seel API 与 Seel RC 三方之间的数据流转，以及每一步传递的具体字段。</p>
+
+        <div class="swimlane">
+          <div class="swimlane-header">
+            <div>步骤</div>
+            <div>🔵 Anker Widget</div>
+            <div>🟣 Seel API</div>
+            <div>🟢 Seel RC</div>
+          </div>
+
+          <!-- 步骤 1 -->
+          <div class="swimlane-row">
+            <div class="swimlane-step">① 发送消息</div>
+            <div class="swimlane-cell" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div>POST <code>/api/chat/messages</code></div>
+              <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:2px;">
+                <span class="field-pill">merchantId</span>
+                <span class="field-pill">visitorId</span>
+                <span class="field-pill">conversationSessionId</span>
+                <span class="field-pill">externalCommentId</span>
+                <span class="field-pill">content</span>
+                <span class="field-pill">viaChannel="anker_widget"</span>
+                <span class="field-pill">extensions.orderNumber</span>
+                <span class="field-pill">extensions.customer.email</span>
+              </div>
+            </div>
+            <div class="swimlane-cell">收到请求，返回 <code>status="received"</code>，开始异步 AI 处理</div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+          </div>
+
+          <!-- 步骤 2 -->
+          <div class="swimlane-row">
+            <div class="swimlane-step">② 轮询回复</div>
+            <div class="swimlane-cell" style="flex-direction:column;align-items:flex-start;gap:4px;">
+              <div>POST <code>/api/chat/messages/poll</code></div>
+              <div style="margin-top:2px;"><span class="field-pill">externalCommentId</span><span style="font-size:11px;color:#94A3B8;margin-left:6px;">间隔 5 s，超时 3 min</span></div>
+            </div>
+            <div class="swimlane-cell" style="flex-direction:column;align-items:flex-start;gap:4px;">
+              <div>返回消息列表，逐条判断：</div>
+              <div><code>direction="OUTBOUND_AI"</code></div>
+              <div><code>processingStatus="COMPLETED"</code></div>
+              <div style="margin-top:4px;"><span class="field-pill purple">blocks[].content</span> → 渲染回复</div>
+            </div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+          </div>
+
+          <!-- 步骤 3 咨询回复 -->
+          <div class="swimlane-row">
+            <div class="swimlane-step">③ 展示回复<br/><span style="font-weight:400;color:#64748B;">（咨询路径）</span></div>
+            <div class="swimlane-cell">将 <span class="field-pill">blocks[].content</span> 渲染为对话气泡，用户在聊天框内获得 AI 解答</div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+          </div>
+
+          <!-- 步骤 4 理赔跳转 -->
+          <div class="swimlane-row">
+            <div class="swimlane-step">④ 构建链接<br/><span style="font-weight:400;color:#64748B;">（理赔路径）</span></div>
+            <div class="swimlane-cell" style="flex-direction:column;align-items:flex-start;gap:6px;">
+              <div>核验保单后构建跳转 URL：</div>
+              <div style="display:flex;flex-wrap:wrap;gap:3px;">
+                <span class="field-pill purple">email</span>
+                <span class="field-pill purple">order</span>
+                <span class="field-pill purple">policyId</span>
+              </div>
+              <div style="font-size:11.5px;color:#94A3B8;">用户点击链接，聊天面板关闭</div>
+            </div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+            <div class="swimlane-cell">接收 URL 参数，自动预填表单字段；用户点击"下一步"完成理赔申请</div>
+          </div>
+
+          <!-- 步骤 5 RC 完成 -->
+          <div class="swimlane-row">
+            <div class="swimlane-step">⑤ 理赔提交</div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+            <div class="swimlane-cell" style="color:#CBD5E1;font-style:italic;">—</div>
+            <div class="swimlane-cell">用户确认预填信息，上传凭证，提交理赔申请；<span class="field-pill green">理赔单号</span> 生成，邮件通知发出</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>轮询终止条件（满足任一即停止）：</strong>
+          <code>① direction="OUTBOUND_AI" 且 processingStatus="COMPLETED" → 渲染 AI 回复
+② 任意消息 processingStatus="FAILED" → 展示错误提示
+③ 累计轮询超过 3 分钟（超时兜底）</code>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 4. 功能需求 -->
+    <div class="section" id="functional">
+      <div class="section-title"><span class="section-num">4</span> 功能需求</div>
+
+      <div class="subsection" id="two-mode">
+        <div class="subsection-title">4.1 双模式对话流程</div>
+
+        <div class="sub2-title">模式一 — 咨询（直接回答）</div>
+        <p>以下话题由机器人在对话框内直接回答，不发生页面跳转。</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:200px">问题类型</th><th>机器人回答内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Seel 保什么？</strong></td><td>列举：包裹丢失、盗窃、运输损坏、重大延误，并附简要说明。</td></tr>
+              <tr><td><strong>我的订单有保障吗？</strong></td><td>确认保障状态、保单号及当前有效的保障类型。</td></tr>
+              <tr><td><strong>什么情况不保？</strong></td><td>列举免责条款：买家反悔、制造质量问题、正常磨损、超出30天申请等。</td></tr>
+              <tr><td><strong>保障期限是多久？</strong></td><td>从购买日起至预计送达日后 30 天。</td></tr>
+              <tr><td><strong>怎么申请理赔？</strong></td><td>说明 4 步操作流程，提供 RC 链接供用户跳转。</td></tr>
+              <tr><td><strong>怎么查理赔进度？</strong></td><td>引导至 resolve.seel.com 登录查询，说明邮件通知节点。</td></tr>
+              <tr><td><strong>要多久处理完？</strong></td><td>24小时审核 → 24–48小时审批 → 3–5个工作日结案。</td></tr>
+              <tr><td><strong>退款还是补发？</strong></td><td>审批通过后两种方式均可，由消费者自行选择。</td></tr>
+              <tr><td><strong>如何联系 Seel？</strong></td><td>提供 support@seel.com 及 resolve.seel.com。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub2-title">模式二 — 理赔（跳转 RC）</div>
+        <p>以下情况触发理赔流程，引导用户跳转至 Seel 理赔中心：</p>
+        <ul class="prd-list">
+          <li>包裹未到达（丢失 / 盗窃场景）</li>
+          <li>商品到货时已损坏（运输损坏场景）</li>
+          <li>订单严重延误（延误 / 在途丢失场景）</li>
+          <li>明确的理赔操作意图："我要申请理赔"、"发起理赔"、"提交理赔申请"等</li>
+        </ul>
+      </div>
+
+      <div class="subsection" id="intent">
+        <div class="subsection-title">4.2 意图识别优先级</div>
+        <p><strong>理赔行动意图优先于咨询意图检测</strong>，防止误判——例如"我要申请理赔"应触发 RC 跳转，而非返回操作说明。</p>
+
+        <div class="intent-explain">
+          <div class="intent-explain-title">🤖 语义分析 · 大模型判断机制</div>
+          <div class="intent-explain-body">
+            <p style="margin-bottom:12px;">意图识别由大模型（LLM）完成，而非简单关键词匹配。模型综合分析用户话语的<strong>字面含义、上下文意图与情绪信号</strong>，按以下逻辑作出判断：</p>
+            <div class="intent-rules">
+              <div class="intent-rule">
+                <div class="intent-rule-icon red">1</div>
+                <div class="intent-rule-text">
+                  <strong>行动意图识别（最高优先）</strong><br/>
+                  若用户表达"发起行动"的意图——如描述已发生的异常事件（"包裹丢了"、"碎了"）或明确要求操作（"申请理赔"、"我要提赔"）——<strong>无论措辞是否包含"理赔"关键词</strong>，均路由至理赔模式触发 RC 跳转。
+                </div>
+              </div>
+              <div class="intent-rule">
+                <div class="intent-rule-icon orange">2</div>
+                <div class="intent-rule-text">
+                  <strong>歧义消解（上下文优先）</strong><br/>
+                  对于模糊表达（如"怎么申请理赔"），模型结合历史对话判断：若当前轮次已知包裹异常，则视为行动意图；若为首次提问且无异常上下文，则视为操作流程咨询，在聊天框内直接回答。
+                </div>
+              </div>
+              <div class="intent-rule">
+                <div class="intent-rule-icon blue">3</div>
+                <div class="intent-rule-text">
+                  <strong>非 Seel 意图过滤</strong><br/>
+                  若消息与 Seel 包裹保障无关（如询问产品规格、退货政策等），模型返回"超出服务范围"标记，由 Anker 客服系统接管，转人工坐席或常规回复流程。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:90px">优先级</th><th style="width:180px">意图类别</th><th>触发示例</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="prio-1">1 — 最高</span></td>
+                <td><span class="tag tag-red">理赔行动</span></td>
+                <td>"没收到"、"包裹丢失"、"到货损坏"、"碎了"、"延误"、"我要申请理赔"、"发起理赔"</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><span class="tag tag-orange">理赔进度查询</span></td>
+                <td>"理赔进度"、"查理赔"、"理赔状态"、"申请到哪了"</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><span class="tag tag-blue">免责条款</span></td>
+                <td>"不保什么"、"免责"、"不在保障范围"、"不涵盖"</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><span class="tag tag-blue">退款 / 补发</span></td>
+                <td>"退款"、"补发"、"赔偿"、"退钱"</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><span class="tag tag-blue">联系支持</span></td>
+                <td>"联系"、"找 Seel"、"发邮件"、"转人工"</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><span class="tag tag-blue">处理时效</span></td>
+                <td>"多久"、"什么时候"、"多长时间"</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><span class="tag tag-blue">保障范围</span></td>
+                <td>"保什么"、"保障内容"、"涵盖哪些"</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td><span class="tag tag-blue">订单保障状态</span></td>
+                <td>"我的订单有保障吗"、"有没有 Seel"</td>
+              </tr>
+              <tr>
+                <td><span class="prio-low">9</span></td>
+                <td><span class="tag tag-blue">操作指引</span></td>
+                <td>"怎么申请"、"如何理赔"、"理赔流程"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection" id="claim-flow">
+        <div class="subsection-title">4.3 理赔引导流程</div>
+        <ol class="prd-list">
+          <li>用户发送理赔类消息（手动输入或点击快捷芯片）。</li>
+          <li>机器人回复："正在查询您的订单……"（约 1 秒延迟，拟人化效果）。</li>
+          <li>机器人回复："正在核验您的 Seel 保单……"（约 1.4 秒延迟）。</li>
+          <li>机器人确认保障状态，展示 RC 跳转链接"🔗 resolve.seel.com"。</li>
+          <li>用户点击链接后，聊天面板关闭，页面跳转至 RC。</li>
+          <li>RC 页面自动预填用户邮箱及订单号，打字机动画逐字呈现，直观确认数据已传递。</li>
+          <li>用户点击"下一步"，在 Seel 平台完成剩余理赔流程。</li>
+        </ol>
+      </div>
+
+      <div class="subsection" id="data">
+        <div class="subsection-title">4.4 Anker 向 Seel RC 传递的数据</div>
+        <p>Anker 将订单相关信息通过 URL 参数传递给 RC 页面，RC 读取后自动预填对应表单字段，用户无需重复录入。</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>字段</th><th>数据来源</th><th>示例值</th></tr></thead>
+            <tbody>
+              <tr><td><strong>邮箱地址</strong></td><td>Anker 登录用户账户</td><td>sarah.johnson@gmail.com</td></tr>
+              <tr><td><strong>订单号</strong></td><td>Anker 订单 ID</td><td>ANK-2024-78432</td></tr>
+              <tr><td><strong>保单号</strong></td><td>与订单绑定的 Seel 保单</td><td>SL-78432</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <strong>RC 跳转链接示例：</strong>
+          <code>https://resolve.seel.com/?email=sarah.johnson%40gmail.com&amp;order=ANK-2024-78432&amp;policyId=SL-78432</code>
+        </div>
+      </div>
+
+      <div class="subsection" id="chips">
+        <div class="subsection-title">4.5 快捷芯片</div>
+        <p>组件提供两组预设快捷芯片，引导用户快速进入对应模式：</p>
+        <div class="chip-groups">
+          <div class="chip-group blue">
+            <div class="chip-group-label">咨询</div>
+            <div class="chips">
+              <span class="chip blue">Seel 保什么？</span>
+              <span class="chip blue">我的订单有保障吗？</span>
+              <span class="chip blue">什么情况不保？</span>
+              <span class="chip blue">保障期限是多久？</span>
+              <span class="chip blue">怎么申请理赔？</span>
+              <span class="chip blue">查理赔进度</span>
+              <span class="chip blue">要多久处理完？</span>
+              <span class="chip blue">退款还是补发？</span>
+              <span class="chip blue">如何联系 Seel？</span>
+            </div>
+          </div>
+          <div class="chip-group purple">
+            <div class="chip-group-label">理赔</div>
+            <div class="chips">
+              <span class="chip purple">包裹未到达</span>
+              <span class="chip purple">商品到货已损坏</span>
+              <span class="chip purple">订单严重延误</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<script>
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(l => l.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(l.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+</script>
+</body>
+</html>
