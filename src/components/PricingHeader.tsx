@@ -7,19 +7,31 @@ import { Button } from '@/components/ui/button';
 import { Globe, Menu, X } from 'lucide-react';
 import { setLocaleCookie } from '@/lib/i18n';
 
+const SIGNUP_URL = 'https://app.datascaler.ai/auth/sign-up';
+const LOGIN_URL = 'https://app.datascaler.ai/auth/sign-in';
+
+// 轻量埋点 helper（GTM dataLayer）
+function track(event: string, params: Record<string, string> = {}) {
+  if (typeof window === 'undefined') return;
+  (window as any).dataLayer = (window as any).dataLayer || [];
+  (window as any).dataLayer.push({ event, ...params });
+}
+
 export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
   const router = useRouter();
   const pathname = usePathname() || '/';
   const isEn =
     forceLang === 'en' ||
     (forceLang === undefined && (pathname === '/en' || pathname.startsWith('/en/')));
+  const lang = isEn ? 'en' : 'zh';
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLangSwitch = () => {
     // 记住手动选择,让 middleware 后续以 cookie 为准,不再按 Accept-Language 跳转。
     setLocaleCookie(isEn ? 'zh' : 'en');
     const path = pathname;
-    if (path.includes('/privacy')) router.push(isEn ? '/privacy' : '/en/privacy');
+    if (path.includes('/mcp')) router.push(isEn ? '/mcp' : '/en/mcp');
+    else if (path.includes('/privacy')) router.push(isEn ? '/privacy' : '/en/privacy');
     else if (path.includes('/terms')) router.push(isEn ? '/terms' : '/en/terms');
     else if (path.includes('/contact')) router.push(isEn ? '/contact' : '/en/contact');
     else if (path.includes('/faq')) router.push(isEn ? '/faq' : '/en/faq');
@@ -30,12 +42,14 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
 
   const menuItems = isEn
     ? [
+        { label: 'MCP', href: '/en/mcp' },
         { label: 'Pricing', href: '/en/pricing' },
         { label: 'Blog', href: '/en/blog' },
         { label: 'FAQ', href: '/en/faq' },
         { label: 'Contact', href: '/en/contact' },
       ]
     : [
+        { label: 'MCP 接入', href: '/mcp' },
         { label: '定价', href: '/pricing' },
         { label: '博客', href: '/blog' },
         { label: '常见问题', href: '/faq' },
@@ -64,39 +78,59 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3 shrink-0">
+        <div className="hidden md:flex items-center gap-2 shrink-0">
           <a
-            href="https://app.datascaler.ai/auth/sign-up"
+            href={LOGIN_URL}
             target="_blank"
             rel="noopener noreferrer"
+            data-cta="header_login"
+            onClick={() => track('login_click', { button_location: 'header', locale: lang })}
+          >
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-sm text-slate-300 hover:text-white hover:bg-white/5"
+            >
+              {isEn ? 'Log in' : '登录'}
+            </Button>
+          </a>
+          <a
+            href={SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cta="header_sign_up"
+            onClick={() => track('sign_up_click', { button_location: 'header', locale: lang })}
           >
             <Button
               size="sm"
               className="rounded-full bg-[#22c55e] px-5 text-sm font-bold text-slate-950 hover:bg-[#22c55e]/85 shadow-[0_0_16px_rgba(34,197,94,0.3)]"
             >
-              {isEn ? 'Get started' : '开始体验'}
+              {isEn ? 'Sign up' : '注册'}
             </Button>
           </a>
           <button
             onClick={handleLangSwitch}
-            className="flex items-center gap-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+            aria-label={isEn ? 'Switch to Chinese' : '切换到英文'}
+            title={isEn ? '中文' : 'English'}
+            className="flex items-center justify-center rounded-md p-2 text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
           >
-            <Globe className="h-3.5 w-3.5" />
-            {isEn ? '中文' : 'EN'}
+            <Globe className="h-4 w-4" />
           </button>
         </div>
 
         <div className="flex md:hidden items-center gap-2">
           <a
-            href="https://app.datascaler.ai/auth/sign-up"
+            href={SIGNUP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            data-cta="header_sign_up"
+            onClick={() => track('sign_up_click', { button_location: 'header_mobile', locale: lang })}
           >
             <Button
               size="sm"
               className="rounded-full bg-[#22c55e] px-4 text-xs font-bold text-slate-950 hover:bg-[#22c55e]/85"
             >
-              {isEn ? 'Get started' : '开始体验'}
+              {isEn ? 'Sign up' : '注册'}
             </Button>
           </a>
           <button
@@ -124,7 +158,20 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
               </Link>
             ))}
           </nav>
-          <div className="mt-3 pt-3 border-t border-white/5">
+          <div className="mt-3 pt-3 border-t border-white/5 flex flex-col gap-3">
+            <a
+              href={LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="header_login"
+              onClick={() => {
+                track('login_click', { button_location: 'header_mobile', locale: lang });
+                setMobileOpen(false);
+              }}
+              className="text-sm text-slate-300 hover:text-white transition-colors"
+            >
+              {isEn ? 'Log in' : '登录'}
+            </a>
             <button
               onClick={() => {
                 handleLangSwitch();

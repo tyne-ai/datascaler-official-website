@@ -16,7 +16,8 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
     // 记住手动选择,让 middleware 后续以 cookie 为准,不再按 Accept-Language 跳转。
     setLocaleCookie(isEn ? 'zh' : 'en');
     const path = pathname;
-    if (path.includes('/privacy')) router.push(isEn ? '/privacy' : '/en/privacy');
+    if (path.includes('/mcp')) router.push(isEn ? '/mcp' : '/en/mcp');
+    else if (path.includes('/privacy')) router.push(isEn ? '/privacy' : '/en/privacy');
     else if (path.includes('/terms')) router.push(isEn ? '/terms' : '/en/terms');
     else if (path.includes('/contact')) router.push(isEn ? '/contact' : '/en/contact');
     else if (path.includes('/faq')) router.push(isEn ? '/faq' : '/en/faq');
@@ -31,6 +32,7 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         col2: {
           title: 'Intelligence Services',
           links: [
+            { label: 'MCP Access', href: '/en/mcp' },
             { label: 'Pricing Plans', href: '/en/pricing' },
             { label: 'Blog', href: '/en/blog' },
             { label: 'FAQ', href: '/en/faq' },
@@ -56,6 +58,7 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         col2: {
           title: '情报服务',
           links: [
+            { label: 'MCP 接入', href: '/mcp' },
             { label: '定价方案', href: '/pricing' },
             { label: '博客', href: '/blog' },
             { label: '常见问题', href: '/faq' },
