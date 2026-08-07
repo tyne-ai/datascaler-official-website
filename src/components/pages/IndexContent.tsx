@@ -152,13 +152,13 @@ function Hero() {
           custom={1}
           className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
         >
-          看见海外消费者，
+          从全球用户声音中，
           <br className="mb-3" />
-          在<span className="text-gradient mt-3 inline-block">怎么讨论你的品牌。</span>
+          <span className="text-gradient mt-3 inline-block">发现增长信号。</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} custom={2} className="mt-5 max-w-2xl text-base leading-relaxed text-secondary-foreground md:text-lg md:leading-relaxed">
-          覆盖 YouTube、TikTok、X、Facebook、Instagram 等 9 个海外公开平台。自定义采集周期，每条结论都能点回原帖。
+          分析海外社媒、社区与评论中的公开讨论，识别真实需求、信任缺口与潜在风险。
         </motion.p>
 
         {/* Search bar — clear focal point with generous spacing */}

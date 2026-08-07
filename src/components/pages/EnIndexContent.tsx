@@ -105,13 +105,13 @@ function Hero() {
           custom={1}
           className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
         >
-          AI brand intelligence
+          Turn Global Consumer Voices
           <br className="mb-3" />
-          that <span className="text-gradient mt-3 inline-block">shows its work.</span>
+          into <span className="text-gradient mt-3 inline-block">Growth Signals.</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} custom={2} className="mt-5 max-w-2xl text-base leading-relaxed text-secondary-foreground md:text-lg md:leading-relaxed">
-          Across 9 public platforms — YouTube, TikTok, X, Facebook, Instagram, and more. Choose your own cadence. Every line links back to the original post.
+          Analyze public conversations across social platforms, communities, and reviews to uncover demand, trust gaps, and emerging risks.
         </motion.p>
 
         <div className="mt-10">

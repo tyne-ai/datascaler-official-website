@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { EnIndexContent } from '@/components/pages/EnIndexContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'DataScaler AI — AI Market Intelligence for Global Brands',
+  title: 'DataScaler AI | Turn Global Consumer Voices into Growth Signals',
   description:
-    'AI-powered competitive intelligence with 100% traceable insights from TikTok, YouTube, Reddit and more. Built for global DTC brands. Free plan — no credit card required.',
+    'Analyze public conversations across social platforms, communities, and reviews to uncover demand, trust gaps, and emerging risks.',
   canonical: '/en',
 });
 
