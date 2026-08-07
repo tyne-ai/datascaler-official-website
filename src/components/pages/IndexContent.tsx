@@ -96,7 +96,7 @@ function HeroSearchInput() {
           <Search className="ml-3 h-5 w-5 text-muted-foreground" />
           <div className="flex-1 relative">
             <Input
-              aria-label="品牌域名搜索"
+              aria-label="品牌名或域名"
               className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0"
               value={focused ? undefined : text}
               placeholder={focused ? "输入你的品牌名……" : ""}
@@ -143,7 +143,7 @@ function Hero() {
         <motion.div variants={fadeUp} custom={0} className="mb-4">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            AI-Powered Brand Intelligence
+            海外消费者洞察
           </span>
         </motion.div>
 
@@ -152,13 +152,13 @@ function Hero() {
           custom={1}
           className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
         >
-          从全球用户声音中，
+          看懂海外用户，
           <br className="mb-3" />
-          <span className="text-gradient mt-3 inline-block">发现增长信号。</span>
+          <span className="text-gradient mt-3 inline-block">找到下一步增长机会。</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} custom={2} className="mt-5 max-w-2xl text-base leading-relaxed text-secondary-foreground md:text-lg md:leading-relaxed">
-          分析海外社媒、社区与评论中的公开讨论，识别真实需求、信任缺口与潜在风险。
+          DataScaler 汇总海外社媒、社区和评论里的公开讨论，帮你看清用户想要什么、顾虑什么，以及哪些风险正在冒头。每条结论都能回到原帖核验。
         </motion.p>
 
         {/* Search bar — clear focal point with generous spacing */}
@@ -169,7 +169,7 @@ function Hero() {
         {/* Platform Strip — surfaces all 9 sources right in the hero */}
         <motion.div variants={fadeUp} custom={4} className="mt-8 w-full max-w-3xl">
           <div className="mb-3 text-center text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
-            数据源 · 9 个海外公开平台
+            覆盖 9 个海外公开平台
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {PLATFORMS.map((name) => (
@@ -195,16 +195,16 @@ function Hero() {
 // ─── Pain Points ─────────────────────────────────────────
 const painPoints = [
   {
-    quote: "这数据从哪儿来的？",
-    desc: "CMO 看 AI 报告的第一句话。通用工具答不上来。DataScaler 每条结论都带 [Ref]，一键跳转原帖——你拿得出来。",
+    quote: "这条结论，有原帖吗？",
+    desc: "有。DataScaler 为每条结论标注来源，点击即可查看对应的帖子、评论和互动数据。",
   },
   {
-    quote: "要么扫得太浅，要么节奏不对。",
-    desc: "通用工具一刀切。DataScaler 让你自己定——采集 1 页到 10 页、按你想要的节奏跑，按品牌阶段和预算选。",
+    quote: "今天最值得关注的，究竟是哪件事？",
+    desc: "DataScaler 把分散在不同平台的信号收拢到一起，帮你先看异动、影响和优先级。",
   },
   {
     quote: "评分掉了 0.3 星，不知道为什么。",
-    desc: "我们知道。DataScaler 直接指向是哪条评论、哪个 KOL、哪个海外社群话题在带——附原帖链接。",
+    desc: "直接定位引发变化的评论、创作者或社区话题，不用再靠人工翻找和猜测。",
   },
 ];
 
@@ -220,10 +220,10 @@ function PainPoints() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            不再为模糊的 AI 文本买单
+            别再让团队对着一段 AI 总结做判断
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            决策级的证据支撑,从哪里来？
+            先看结论，再点回原帖和评论核验。
           </motion.p>
         </motion.div>
 
@@ -266,10 +266,10 @@ function CoreBrief() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            重构交互逻辑，实现结论先行，数据在后
+            先看结论，需要时再看原始数据
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            AI 洞察简报 + 白盒化证据链：hover [Ref] 标签即可溯源到原始帖子
+            一页读完本周重点；点击 [Ref]，即可查看对应原帖。
           </motion.p>
         </motion.div>
 
@@ -287,16 +287,16 @@ function CoreBrief() {
                 <FileText className="h-5 w-5 text-ring" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">
-                AI 洞察简报 + 白盒化证据链
+                一份能直接带进周会的洞察简报
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                结论先行：30 秒读完本周声量、情感、竞品差距的核心综述。所有结论带 <span className="text-ring font-semibold">[Ref]</span> 标记，一键追溯到原始帖子和评论，有据可依。
+                30 秒看完声量变化、用户态度和竞品动向。每条结论都带 <span className="text-ring font-semibold">[Ref]</span>，方便团队当场核验。
               </p>
               <div className="space-y-3">
                 {[
-                  "Hover [Ref] 即弹出 Evidence Card",
-                  "显示原始社媒帖子、情感标签、互动数据",
-                  "白盒逻辑：每条结论可追溯、可验证",
+                  "点击 [Ref] 查看原帖或评论",
+                  "同时查看用户态度和互动数据",
+                  "会议上就能核实，不用事后重新找数据",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Zap className="h-3.5 w-3.5 text-primary shrink-0" />
@@ -335,14 +335,14 @@ function CompetitorIntel() {
           <motion.div variants={fadeUp} className="mb-4 flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-ring/30 bg-ring/10 px-4 py-1.5 text-xs font-medium text-ring">
               <BarChart3 className="h-3 w-3" />
-              Competitive Intelligence
+              竞品动态
             </span>
           </motion.div>
           <motion.h2 variants={fadeUp} custom={1} className="font-display text-3xl font-bold md:text-4xl" style={{ color: "#F8FAFC" }}>
-            全网侦测竞品动态，一键诊断跨平台差距
+            竞品最近做了什么，一眼看清
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            AI Assistant 基于全量社媒数据，秒级锁定行业对手的舆情弱点与增长机会。
+            把不同平台上的声量、用户态度和内容表现放在一起比较，看哪里落后，哪里还有机会。
           </motion.p>
         </motion.div>
 
@@ -376,10 +376,10 @@ function CopilotSection() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            从竞品情报到增长行动,仅需秒级跨越
+            从发现问题到安排动作，不用再来回翻报表
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            具备读屏能力的 AI Assistant 实时归因,自动生成按优先级排列的行动方案
+            AI 助手会结合当前数据回答问题，并把需要跟进的事情整理成按优先级排列的清单。
           </motion.p>
         </motion.div>
 
@@ -392,14 +392,14 @@ function CopilotSection() {
           className="mt-12 mx-auto max-w-5xl"
         >
           <motion.p variants={fadeUp} className="text-center text-xs text-muted-foreground mb-6">
-            示例追问 · 都是出海团队真实在问的问题
+            出海团队常问的问题
           </motion.p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { tag: "KOL 发现", q: "“帮我在 INS 上找本月最适合合作的 5 个 KOL。”" },
-              { tag: "舆情归因", q: "“上周亚马逊差评突然变多,是哪条话题在带？”" },
-              { tag: "竞品对比", q: "“用户在 Reddit 上,拿我们跟哪个竞品比得最多？”" },
-              { tag: "新品反馈", q: "“新品上线一周,海外用户最爱、最骂哪个点？”" },
+              { tag: "创作者筛选", q: "“帮我找出这个月最值得合作的 5 位 Instagram 创作者。”" },
+              { tag: "差评归因", q: "“上周 Amazon 差评突然变多，问题主要出在哪里？”" },
+              { tag: "竞品对比", q: "“Reddit 用户最常把我们和哪个品牌放在一起比？”" },
+              { tag: "新品反馈", q: "“新品上线一周，海外用户最喜欢和最不满的分别是什么？”" },
               { tag: "回应决策", q: "“这条 Reddit 帖子要不要回应？影响有多大？”" },
             ].map((ex, i) => (
               <motion.div
@@ -442,7 +442,7 @@ function CopilotSection() {
 const plans = [
   {
     key: "free",
-    title: "Free 免费版",
+    title: "免费版",
     monthlyUSD: 0,
     isFree: true,
     metrics: [
@@ -452,7 +452,7 @@ const plans = [
       { label: "导出", value: "不支持" },
       { label: "账号", value: "1" },
     ],
-    cta: "开始体验",
+    cta: "免费体验",
     href: "https://app.datascaler.ai/plans",
     icon: Zap,
     iconBg: "bg-primary/15",
@@ -460,7 +460,7 @@ const plans = [
   },
   {
     key: "pro",
-    title: "Pro 专业版",
+    title: "专业版",
     monthlyUSD: 199,
     popular: true,
     metrics: [
@@ -470,7 +470,7 @@ const plans = [
       { label: "导出", value: "1,000 / 月" },
       { label: "账号", value: "1" },
     ],
-    cta: "选择 Pro",
+    cta: "选择专业版",
     href: "https://app.datascaler.ai/plans",
     icon: Crown,
     iconBg: "bg-ring/15",
@@ -478,13 +478,13 @@ const plans = [
   },
   {
     key: "team",
-    title: "Team 团队版",
+    title: "团队版",
     monthlyUSD: 499,
     metrics: [
       { label: "品牌数", value: "3" },
       { label: "报告", value: "9 / 月" },
       { label: "深度追问", value: "300 / 月" },
-      { label: "导出", value: "3000" },
+      { label: "导出", value: "3,000 / 月" },
       { label: "账号", value: "5" },
     ],
     cta: "预约演示",
@@ -495,13 +495,13 @@ const plans = [
   },
   {
     key: "enterprise",
-    title: "Enterprise 企业版",
+    title: "企业版",
     monthlyUSD: 1299,
     metrics: [
       { label: "品牌数", value: "8" },
       { label: "报告", value: "25 / 月" },
-      { label: "深度追问", value: "1000 / 月" },
-      { label: "导出", value: "10000" },
+      { label: "深度追问", value: "1,000 / 月" },
+      { label: "导出", value: "10,000 / 月" },
       { label: "账号", value: "10" },
     ],
     cta: "联系销售",
@@ -532,14 +532,14 @@ function PricingSection() {
           <motion.div variants={fadeUp} custom={0}>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary">
               <Crown className="h-3 w-3" />
-              Pricing
+              价格方案
             </span>
           </motion.div>
           <motion.h2 variants={fadeUp} custom={1} className="mt-6 font-display text-3xl font-bold text-foreground md:text-4xl">
-            简单透明的商业化定价
+            按团队规模选择套餐
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            无隐藏费用。选择适合您品牌阶段的方案，即刻开始。
+            先从免费版开始，需要更多报告、账号或数据时再升级。
           </motion.p>
         </div>
 
@@ -581,7 +581,7 @@ function PricingSection() {
                 {isPopular && (
                   <div className="absolute -top-3 right-4">
                     <span className="rounded-full bg-ring px-3 py-1 text-[10px] font-bold text-background flex items-center gap-1">
-                      <Star className="h-3 w-3" /> MOST POPULAR
+                      <Star className="h-3 w-3" /> 最受欢迎
                     </span>
                   </div>
                 )}
@@ -669,7 +669,7 @@ function PricingSection() {
         {/* Link to full pricing */}
         <motion.div variants={fadeUp} custom={8} className="mt-10 text-center">
           <a href="/pricing" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-            查看完整定价细则 →
+            查看完整价格与额度 →
           </a>
         </motion.div>
       </motion.div>
@@ -683,9 +683,9 @@ function PricingSection() {
 
 // ─── 社会证明 ────────────────────────────────────────────
 const proofStats = [
-  { value: "200+", label: "服务出海品牌" },
+  { value: "300+", label: "已服务品牌" },
   { value: "9", label: "海外公开平台" },
-  { value: "100%", label: "可溯源洞察" },
+  { value: "原帖", label: "支持点击核验" },
 ];
 
 const proofQuotes = [
@@ -718,7 +718,7 @@ function SocialProof() {
         className="relative z-10 mx-auto max-w-6xl"
       >
         <motion.h2 variants={fadeUp} className="text-center font-display text-2xl font-bold text-foreground md:text-4xl">
-          全球品牌都在用 DataScaler 看见客户真正看见的
+          300+ 品牌用 DataScaler 看懂海外消费者
         </motion.h2>
 
         <motion.div variants={fadeUp} custom={1} className="mt-10 grid grid-cols-3 gap-4">
@@ -767,7 +767,7 @@ function FooterCTA() {
         className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-          <span className="text-gradient">让每一次决策都有据可依</span>
+          <span className="text-gradient">先看清用户怎么想，再决定下一步怎么做</span>
         </motion.h2>
         <motion.div variants={fadeUp} custom={1} className="mt-10">
           <a href="https://app.datascaler.ai/plans" target="_blank" rel="noopener noreferrer">
@@ -776,7 +776,7 @@ function FooterCTA() {
               className="glow-primary bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/80"
             >
               <Rocket className="mr-2 h-5 w-5" />
-              免费生成我的品牌报告 →
+              免费生成品牌报告 →
             </Button>
           </a>
         </motion.div>

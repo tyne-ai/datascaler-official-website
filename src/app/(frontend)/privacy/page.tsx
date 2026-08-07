@@ -5,7 +5,7 @@ import { PrivacyContent } from '@/components/pages/PrivacyContent';
 export const metadata: Metadata = buildMetadata({
   title: '隐私政策 — DataScaler',
   description:
-    'DataScaler 隐私政策：数据极简采集、零知识训练、身份脱敏、即用即焚与 GDPR/CCPA 合规说明。',
+    '了解 DataScaler 收集哪些数据、如何使用第三方 AI 服务、数据留存方式、用户权利和安全措施。',
   canonical: '/privacy',
 });
 

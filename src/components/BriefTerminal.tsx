@@ -16,7 +16,7 @@ const briefLines = [
       user: "u/TechReviewer2026",
       avatar: "TR",
       content: '"Dreame L20 Ultra 的清洁力测试让我彻底放弃了 Roborock。自清洁底座真的太方便了！"',
-      sentiment: "Positive",
+      sentiment: "正面",
       sentimentColor: "bg-primary/20 text-primary",
       upvotes: 342,
       comments: 87,
@@ -33,7 +33,7 @@ const briefLines = [
       user: "@cleaningpro",
       avatar: "CP",
       content: '"吸力对比测试：Dreame vs Roborock vs Dyson" — 视频播放量 1.2M，评论区正面率 91%',
-      sentiment: "Viral Positive",
+      sentiment: "高传播·正面",
       sentimentColor: "bg-primary/20 text-primary",
       upvotes: 45200,
       comments: 1893,
@@ -41,8 +41,8 @@ const briefLines = [
   },
   {
     id: "risk",
-    text: "检测到竞品威胁信号：",
-    highlight: "5 个活跃攻势",
+    text: "竞品相关讨论：",
+    highlight: "5 个话题正在升温",
     highlightColor: "text-destructive",
     ref: {
       platform: "YouTube",
@@ -50,7 +50,7 @@ const briefLines = [
       user: "@VacuumWars",
       avatar: "VW",
       content: '"Why I switched FROM Dreame to Roborock S8 MaxV Ultra — Honest Review After 6 Months"',
-      sentiment: "Negative",
+      sentiment: "负面",
       sentimentColor: "bg-destructive/20 text-destructive",
       upvotes: 89400,
       comments: 2341,
@@ -58,8 +58,8 @@ const briefLines = [
   },
   {
     id: "opportunity",
-    text: "发现市场机会窗口：",
-    highlight: "宠物场景需求激增",
+    text: "用户需求变化：",
+    highlight: "养宠家庭更关心毛发清理",
     highlightColor: "text-accent",
     ref: {
       platform: "Amazon Reviews",
@@ -67,7 +67,7 @@ const briefLines = [
       user: "Verified Buyer",
       avatar: "VB",
       content: '"As a pet owner with 3 cats, I need something that handles hair better. The Dreame works great but the dustbin is too small for daily use."',
-      sentiment: "Mixed",
+      sentiment: "中性",
       sentimentColor: "bg-accent/20 text-accent",
       upvotes: 156,
       comments: 43,
@@ -87,7 +87,7 @@ export default function BriefTerminal() {
           <div className="h-2.5 w-2.5 rounded-full bg-destructive/80" />
           <div className="h-2.5 w-2.5 rounded-full bg-primary/80" />
           <div className="h-2.5 w-2.5 rounded-full bg-accent/80" />
-          <span className="ml-3 text-xs text-muted-foreground font-mono">DataScaler — AI Insight Brief v2.4</span>
+          <span className="ml-3 text-xs text-muted-foreground font-mono">DataScaler — 每周消费者洞察</span>
           <div className="ml-auto flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-[10px] text-primary font-medium">LIVE</span>
@@ -101,8 +101,8 @@ export default function BriefTerminal() {
               <FileText className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Brand: dreame.com • Weekly Report</p>
-              <p className="text-sm font-semibold text-foreground">AI Insight Brief — Mar 10-17, 2026</p>
+              <p className="text-xs text-muted-foreground">品牌：dreame.com · 周报</p>
+              <p className="text-sm font-semibold text-foreground">消费者洞察简报 · 2026 年 3 月 10–17 日</p>
             </div>
           </div>
 
@@ -118,7 +118,7 @@ export default function BriefTerminal() {
             </div>
             <div className="flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5">
               <AlertTriangle className="h-3.5 w-3.5 text-destructive" />
-              <span className="text-xs font-semibold text-destructive">5 竞品威胁</span>
+              <span className="text-xs font-semibold text-destructive">5 个竞品动态</span>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function BriefTerminal() {
                         </div>
                         <div className="ml-auto flex items-center gap-1 text-[10px] text-ring cursor-pointer hover:text-ring/80">
                           <ExternalLink className="h-3 w-3" />
-                          原始链接
+                          查看原帖
                         </div>
                       </div>
                     </motion.div>
@@ -203,7 +203,7 @@ export default function BriefTerminal() {
 
         {/* Bottom action bar */}
         <div className="border-t border-border/30 px-6 py-3 flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground">4 insights • 4 evidence sources attached</span>
+          <span className="text-[10px] text-muted-foreground">4 条结论 · 附 4 个原帖来源</span>
           <button className="text-[10px] font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-1">
             导出完整报告 <ExternalLink className="h-3 w-3" />
           </button>

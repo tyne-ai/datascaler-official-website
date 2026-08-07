@@ -15,28 +15,28 @@ const fadeUp = {
 
 const sections = [
   {
-    title: "Section 1: Data Minimization Principle",
-    body: "We only collect essential account identity and in-platform query data. DataScaler NEVER tracks or records your off-site private browsing or non-public social media interactions.",
+    title: "1. Information we collect",
+    body: "We collect the account details, in-product queries, and basic usage records needed to provide, maintain, and improve the service. We do not seek access to private social content or your off-site private browsing history.",
   },
   {
-    title: "Section 2: Zero-Knowledge Training Commitment",
-    body: 'We enforce a strict "Non-Training" policy. Your search queries, watchlists, and uploaded data are NEVER used to train our public AI models. Your strategic intent remains 100% confidential.',
+    title: "2. Customer data and model training",
+    body: "Unless you give us explicit permission, we do not use your search terms, brand watchlists, or uploaded comparison data to train public-facing AI models.",
   },
   {
-    title: "Section 3: Anonymized AI Processing",
-    body: "We utilize world-leading inference units (e.g., Google Gemini). All requests are processed via De-identification protocols, stripping out PII before calling third-party models.",
+    title: "3. Third-party AI services",
+    body: "We may use third-party AI services, including Google Gemini, to process parts of a request. Before data is sent, we minimize personal information and remove direct identifiers where reasonably possible.",
   },
   {
-    title: 'Section 4: Data Retention & "Process-and-Delete"',
-    body: 'Brand data uploaded for 1:1 benchmarking follows a "Process-and-Delete" policy. Data is processed in-memory and destroyed immediately upon task completion. No persistent storage is maintained.',
+    title: "4. Data retention",
+    body: "Brand data uploaded for a one-time comparison is scheduled for deletion after processing. We may retain limited records for account administration, security, troubleshooting, or legal obligations.",
   },
   {
-    title: "Section 5: Global Compliance (GDPR & CCPA)",
-    body: 'Fully compliant with GDPR and CCPA standards. You maintain absolute control, including the Right to Access, Rectify, and the "Right to be Forgotten."',
+    title: "5. Your privacy rights",
+    body: "Depending on where you live, you may have the right to access, correct, delete, or export personal information, or to object to certain processing. Contact us to submit a request.",
   },
   {
-    title: "Section 6: Security Safeguards",
-    body: "All transmissions are secured via TLS 1.3. Stored data is protected by AES-256 bank-grade encryption with strict Role-Based Access Control (RBAC).",
+    title: "6. Security",
+    body: "We use measures such as encryption in transit, access controls, and permission separation to protect data. No method of transmission or storage is completely secure, and we continue to review and improve our safeguards.",
   },
 ];
 
@@ -59,7 +59,7 @@ export function PrivacyEnContent() {
                 Privacy Policy
               </h1>
               <p className="text-sm text-muted-foreground">
-                Last Updated: March 31, 2026
+                Last updated: March 31, 2026
               </p>
             </div>
             <button

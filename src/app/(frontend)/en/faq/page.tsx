@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { FaqEnContent } from '@/components/pages/FaqEnContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'FAQ — DataScaler AI Market Intelligence',
+  title: 'Frequently Asked Questions | DataScaler',
   description:
-    'DataScaler FAQ: data sources, AI accuracy and evidence chain, platform coverage, compliance, and how to get started.',
+    'Straight answers about DataScaler data sources, platform coverage, source verification, setup, and plans.',
   canonical: '/en/faq',
 });
 

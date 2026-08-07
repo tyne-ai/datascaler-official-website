@@ -7,8 +7,8 @@ import type { Post } from '@/payload-types';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = buildMetadata({
-  title: '博客 — DataScaler 品牌情报洞察',
-  description: 'DataScaler 团队关于品牌情报、社媒舆情与竞品信号的研究、基准与决策洞察。',
+  title: '博客 | DataScaler',
+  description: 'DataScaler 团队分享的行业数据、消费者讨论和实际分析方法。',
   canonical: '/blog',
 });
 

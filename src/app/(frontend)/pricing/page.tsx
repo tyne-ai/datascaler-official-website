@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { PricingContent } from '@/components/pages/PricingContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: '定价方案 — DataScaler AI 市场情报订阅',
+  title: '价格与套餐 | DataScaler',
   description:
-    'DataScaler 订阅方案：Free、Pro、Team、Enterprise 四档，按 Credit 计费。永久免费版无需绑卡，可溯源 AI 洞察。查看完整定价与配额。',
+    '从免费版开始，再按品牌数、报告数、账号数和数据用量选择 DataScaler 套餐。查看完整价格和积分规则。',
   canonical: '/pricing',
 });
 

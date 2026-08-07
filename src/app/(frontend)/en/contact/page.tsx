@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { ContactEnContent } from '@/components/pages/ContactEnContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact Us — DataScaler Expert Demo & Inquiries',
+  title: 'Contact | DataScaler',
   description:
-    'Book a DataScaler expert demo or reach out about brand intelligence, custom plans, and partnerships. We respond within one business day.',
+    'Talk with the DataScaler team about a product walkthrough, enterprise plans, API access, or partnerships.',
   canonical: '/en/contact',
 });
 

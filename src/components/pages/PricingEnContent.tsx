@@ -42,10 +42,10 @@ function PricingHero() {
           </span>
         </motion.div>
         <motion.h1 variants={fadeUp} custom={1} className="mt-8 font-display text-3xl font-bold text-foreground md:text-5xl">
-          Pricing & Billing
+          Choose the plan that fits your team
         </motion.h1>
         <motion.p variants={fadeUp} custom={2} className="mx-auto mt-6 max-w-[700px] text-base text-muted-foreground" style={{ lineHeight: 1.7 }}>
-          Pick a plan → Need more → Top up Credits
+          Start free. Upgrade your plan or add credits when you need more reports, seats, or data.
         </motion.p>
       </motion.div>
     </section>
@@ -56,7 +56,7 @@ function PricingHero() {
 const plans = [
   {
     name: "Free",
-    subtitle: "Free forever · No card required",
+    subtitle: "Try the full workflow",
     monthly: 0,
     icon: Star,
     badge: null,
@@ -66,16 +66,15 @@ const plans = [
       { label: "Deep questions (total)", value: "6" },
       { label: "Export", value: "Not supported" },
       { label: "Seats", value: "1" },
-      { label: "AI rate limit", value: "1 rpm" },
     ],
-    cta: "Get started",
+    cta: "Start free",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
     footnote: "Free forever — no credit card required and no auto-charge. One-time allotment; upgrade to Pro anytime for more.",
   },
   {
     name: "Pro",
-    subtitle: "Best for growing brands",
+    subtitle: "Ongoing tracking for one brand",
     monthly: 199,
     icon: Zap,
     badge: "MOST POPULAR",
@@ -85,16 +84,15 @@ const plans = [
       { label: "Deep questions / mo", value: "60" },
       { label: "Export", value: "1,000 / mo" },
       { label: "Seats", value: "1" },
-      { label: "AI rate limit", value: "1 rpm" },
     ],
-    cta: "Choose Pro",
+    cta: "Start with Pro",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
     footnote: null,
   },
   {
     name: "Team",
-    subtitle: "Multi-brand collaboration",
+    subtitle: "Built for multi-brand teams",
     monthly: 499,
     icon: Users,
     badge: null,
@@ -102,9 +100,8 @@ const plans = [
       { label: "Brands", value: "3" },
       { label: "Reports / mo", value: "9" },
       { label: "Deep questions / mo", value: "300" },
-      { label: "Export", value: "3000" },
+      { label: "Export", value: "3,000 / mo" },
       { label: "Seats", value: "5" },
-      { label: "AI rate limit", value: "3 rpm" },
     ],
     cta: "Book a demo",
     href: "https://app.datascaler.ai/plans",
@@ -113,7 +110,7 @@ const plans = [
   },
   {
     name: "Enterprise",
-    subtitle: "Custom for global brands",
+    subtitle: "More coverage and higher volume",
     monthly: 1299,
     icon: Building2,
     badge: null,
@@ -121,9 +118,8 @@ const plans = [
       { label: "Brands", value: "8" },
       { label: "Reports / mo", value: "25" },
       { label: "Deep questions / mo", value: "1,000" },
-      { label: "Export", value: "10000" },
+      { label: "Export", value: "10,000 / mo" },
       { label: "Seats", value: "10" },
-      { label: "AI rate limit", value: "3 rpm" },
     ],
     cta: "Contact sales",
     href: null,
@@ -142,8 +138,8 @@ function PlansSection() {
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="relative z-10 mx-auto max-w-6xl rounded-2xl border border-border/40 bg-card/20 backdrop-blur-sm p-8 md:p-10">
 
         <motion.div variants={fadeUp} custom={0} className="text-center mb-10">
-          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Subscription</span>
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Base Plans</h2>
+          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Plans</span>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Pick the level of coverage you need</h2>
         </motion.div>
 
         {/* Toggle */}
@@ -296,9 +292,9 @@ function CreditsSection() {
 
         {/* Header */}
         <motion.div variants={fadeUp} custom={0} className="text-center">
-          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Credits & Add-ons</span>
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Credits & Add-ons</h2>
-          <p className="mt-2 text-sm text-muted-foreground">$1 = 1 Credit · Top up on demand when your plan runs out</p>
+          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Credits</span>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Add usage only when you need it</h2>
+          <p className="mt-2 text-sm text-muted-foreground">$1 buys 1 credit. Use credits for extra reports, follow-up questions, exports, or premium sources.</p>
         </motion.div>
 
         {/* Layer 1: Top-up packs (centered, hero) */}
@@ -321,7 +317,7 @@ function CreditsSection() {
                 rel="noopener noreferrer"
                 className={`block mt-4 w-full rounded-lg text-sm font-medium py-2 transition-colors text-center ${p.tag ? "bg-primary text-primary-foreground hover:bg-primary/90" : "border border-border/50 text-foreground/80 hover:bg-card/40 hover:text-foreground"}`}
               >
-                Top up now
+                Buy credits
               </a>
             </div>
           ))}
@@ -329,7 +325,7 @@ function CreditsSection() {
 
         {/* Layer 2: Consumption rules (below, equal width) */}
         <motion.div variants={fadeUp} custom={2} className="space-y-4">
-          <p className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase text-center">Consumption rules</p>
+          <p className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase text-center">How credits are used</p>
           <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border/40 bg-border/30 sm:grid-cols-2 lg:grid-cols-5">
             {consumptionListEn.map((item) => (
               <li key={item.title} className="flex min-h-[88px] flex-col items-center justify-center gap-1.5 bg-card/10 px-3 py-4 text-center">
@@ -359,7 +355,7 @@ function CreditsSection() {
 
         {/* Validity */}
         <p className="text-[11px] text-muted-foreground/60 text-center">
-          Credits valid for 12 months; redeemed usage valid for 3 months.
+          Credits are valid for 12 months. Usage redeemed with credits is valid for 3 months.
         </p>
 
       </motion.div>
@@ -375,7 +371,7 @@ const faqsEN = [
   { q: "How do I cancel? When does it take effect?", a: "You can cancel in Billing & Plans. Cancellation takes effect at the end of your current billing period (as shown in the UI)." },
   { q: "How is the annual discount calculated?", a: "Annual pricing is 10% off: annual = monthly × 12 × 0.9. Final amounts are shown at checkout." },
   { q: "What if I need more usage?", a: "Upgrade your plan for higher monthly limits, or top up Credits for reports, deep questions, and export." },
-  { q: "How are Credits and premium data sources (Reddit / Amazon) billed?", a: "Credits use $1 = 1 Credit and only kick in once your plan quota is exhausted. Common usage: 1) Out of quota — buy a $10–$470 top-up pack and redeem for full reports (70 Credits / report), AI follow-up (10 Credits / 10 asks), or data export (10 Credits / 200 rows). 2) Attaching Reddit / Amazon — a full report is 70 Credits; adding Reddit costs +10 Credits / report and adding Amazon Reviews costs +12 Credits / report. The other 7 default data sources (YouTube, TikTok, X, Facebook, Instagram, Pinterest, Trustpilot) are already included. Credit balance never expires; redeemed usage is valid for 12 months." },
+  { q: "How do credits and premium sources work?", a: "Each dollar buys 1 credit. A full report uses 70 credits, 10 follow-up questions use 10 credits, and 200 exported rows use 10 credits. Reports include YouTube, TikTok, X, Facebook, Instagram, Pinterest, and Trustpilot by default. Reddit adds 10 credits per report, and Amazon Reviews adds 12. Credits are valid for 12 months; usage redeemed with credits is valid for 3 months." },
 ];
 
 function FAQSection() {
@@ -412,12 +408,12 @@ function FooterCTA() {
       </div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-          Stop Guessing.<br /><span className="text-gradient">Start Scaling with Evidence.</span>
+          Start free.<br /><span className="text-gradient">Add more when your team needs it.</span>
         </motion.h2>
         <motion.div variants={fadeUp} custom={1} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://app.datascaler.ai/plans" target="_blank">
             <Button size="lg" className="glow-primary bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/80">
-              Get started
+              Start free
             </Button>
           </a>
         </motion.div>

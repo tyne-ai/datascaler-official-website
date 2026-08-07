@@ -135,8 +135,8 @@ function RefRow({ data: r }: { data: (typeof refs)[0] }) {
 export default function HeroBriefPanel() {
   const [actionHovered, setActionHovered] = useState(false);
 
-  const aiConclusion =
-    "本周北美声量环比增长 23%，主要受 TikTok 测评驱动；但受 Roborock 新品发布影响，竞品压力升至 P0 级，需关注售后评价回调。";
+  const weeklySummary =
+    "本周北美相关讨论环比增长 23%，主要来自 TikTok 测评内容。Roborock 新品发布后，用户对比明显增多；建议继续跟踪购买后的使用反馈。";
 
   return (
     <div className="glow-border relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm">
@@ -146,7 +146,7 @@ export default function HeroBriefPanel() {
         <div className="h-2.5 w-2.5 rounded-full bg-primary/80" />
         <div className="h-2.5 w-2.5 rounded-full bg-accent/80" />
         <span className="ml-3 text-xs text-muted-foreground font-mono">
-          AI Insight Brief — dreame.com — Mar 10-17, 2026
+          每周消费者洞察 — dreame.com — 2026 年 3 月 10–17 日
         </span>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -155,13 +155,13 @@ export default function HeroBriefPanel() {
       </div>
 
       <div className="p-6 space-y-5">
-        {/* AI Conclusion — streaming style */}
+        {/* Weekly summary — streaming style */}
         <div className="flex items-start gap-3 rounded-xl bg-ring/8 border border-ring/20 px-5 py-4">
           <Sparkles className="h-4 w-4 text-ring shrink-0 mt-0.5" />
           <div>
-            <span className="text-ring font-semibold text-[10px] uppercase tracking-wider">AI 结论</span>
+            <span className="text-ring font-semibold text-[10px] tracking-wider">本周重点</span>
             <p className="mt-1.5 text-sm leading-relaxed text-secondary-foreground">
-              {aiConclusion}
+              {weeklySummary}
               <span className="inline-block w-[2px] h-4 bg-ring/80 animate-pulse ml-1 align-middle" />
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function HeroBriefPanel() {
               <AlertTriangle className="h-4 w-4 text-destructive" />
               <p className="text-2xl font-bold text-foreground">5</p>
             </div>
-            <p className="text-[11px] text-muted-foreground">竞品威胁</p>
+            <p className="text-[11px] text-muted-foreground">竞品动态</p>
             <div className="flex items-center justify-center gap-1.5 mt-2">
               {["Roborock", "Dyson", "iRobot"].map((c) => (
                 <span
@@ -218,7 +218,7 @@ export default function HeroBriefPanel() {
           <div className="flex items-center gap-2">
             <Sparkles className="h-3.5 w-3.5 text-primary/60" />
             <span className="text-[11px] text-muted-foreground/70 font-medium">
-              建议行动 (Suggested Actions)
+              建议动作
             </span>
           </div>
           <AnimatePresence>
@@ -232,15 +232,15 @@ export default function HeroBriefPanel() {
               >
                 <div className="mt-2.5 space-y-2">
                   <div className="flex items-start gap-2">
-                    <span className="shrink-0 rounded bg-destructive/20 px-1.5 py-0.5 text-[9px] font-bold text-destructive">P0</span>
+                    <span className="shrink-0 rounded bg-destructive/20 px-1.5 py-0.5 text-[9px] font-bold text-destructive">优先</span>
                     <p className="text-xs text-primary leading-relaxed">
-                      立即在 Reddit r/VacuumCleaners 回应关于"电池续航"的负面讨论，防止舆情扩散。
+                      先核对电池续航问题的影响范围，再在 Reddit r/VacuumCleaners 回复用户。
                     </p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="shrink-0 rounded bg-accent/20 px-1.5 py-0.5 text-[9px] font-bold text-accent">P1</span>
+                    <span className="shrink-0 rounded bg-accent/20 px-1.5 py-0.5 text-[9px] font-bold text-accent">本周</span>
                     <p className="text-xs text-primary/80 leading-relaxed">
-                      复用 TikTok 高互动素材至 Instagram Reels，预计提升 15% 转化率。
+                      把 TikTok 上高互动的测评素材改成 Instagram Reels，并对比两个渠道的完播率和转化表现。
                     </p>
                   </div>
                 </div>

@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { EnIndexContent } from '@/components/pages/EnIndexContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'DataScaler AI | Turn Global Consumer Voices into Growth Signals',
+  title: 'DataScaler | See What Customers Want and What Is Getting in the Way',
   description:
-    'Analyze public conversations across social platforms, communities, and reviews to uncover demand, trust gaps, and emerging risks.',
+    'Bring public posts, reviews, and community conversations into one view to spot customer demand, objections, and emerging risks. Every insight links back to the source.',
   canonical: '/en',
 });
 

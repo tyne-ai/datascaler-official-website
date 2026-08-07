@@ -131,8 +131,8 @@ function RefRow({ data: r }: { data: (typeof refs)[0] }) {
 export default function HeroBriefPanel() {
   const [actionHovered, setActionHovered] = useState(false);
 
-  const aiConclusion =
-    "North America volume grew 23% week-over-week, primarily driven by TikTok reviews. However, Roborock's new product launch has elevated competitor pressure to P0 — monitor post-purchase review trends closely.";
+  const weeklySummary =
+    "Conversation volume in North America rose 23% week over week, led by TikTok reviews. Comparisons with Roborock also picked up after its latest launch, making post-purchase feedback the next area to watch.";
 
   return (
     <div className="glow-border relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm">
@@ -141,7 +141,7 @@ export default function HeroBriefPanel() {
         <div className="h-2.5 w-2.5 rounded-full bg-primary/80" />
         <div className="h-2.5 w-2.5 rounded-full bg-accent/80" />
         <span className="ml-3 text-xs text-muted-foreground font-mono">
-          AI Insight Brief — dreame.com — Mar 10-17, 2026
+          Weekly customer intelligence — dreame.com — Mar 10–17, 2026
         </span>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -153,9 +153,9 @@ export default function HeroBriefPanel() {
         <div className="flex items-start gap-3 rounded-xl bg-ring/8 border border-ring/20 px-5 py-4">
           <Sparkles className="h-4 w-4 text-ring shrink-0 mt-0.5" />
           <div>
-            <span className="text-ring font-semibold text-[10px] uppercase tracking-wider">AI Summary</span>
+            <span className="text-ring font-semibold text-[10px] uppercase tracking-wider">This week</span>
             <p className="mt-1.5 text-sm leading-relaxed text-secondary-foreground">
-              {aiConclusion}
+              {weeklySummary}
               <span className="inline-block w-[2px] h-4 bg-ring/80 animate-pulse ml-1 align-middle" />
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function HeroBriefPanel() {
               <AlertTriangle className="h-4 w-4 text-destructive" />
               <p className="text-2xl font-bold text-foreground">5</p>
             </div>
-            <p className="text-[11px] text-muted-foreground">Threat</p>
+            <p className="text-[11px] text-muted-foreground">Competitor mentions</p>
             <div className="flex items-center justify-center gap-1.5 mt-2">
               {["Roborock", "Dyson", "iRobot"].map((c) => (
                 <span
@@ -209,7 +209,7 @@ export default function HeroBriefPanel() {
           <div className="flex items-center gap-2">
             <Sparkles className="h-3.5 w-3.5 text-primary/60" />
             <span className="text-[11px] text-muted-foreground/70 font-medium">
-              Suggested Actions
+              What to do next
             </span>
           </div>
           <AnimatePresence>
@@ -223,15 +223,15 @@ export default function HeroBriefPanel() {
               >
                 <div className="mt-2.5 space-y-2">
                   <div className="flex items-start gap-2">
-                    <span className="shrink-0 rounded bg-destructive/20 px-1.5 py-0.5 text-[9px] font-bold text-destructive">P0</span>
+                    <span className="shrink-0 rounded bg-destructive/20 px-1.5 py-0.5 text-[9px] font-bold text-destructive">First</span>
                     <p className="text-xs text-primary leading-relaxed">
-                      Respond immediately to "battery life" complaints on Reddit r/VacuumCleaners to prevent narrative spread.
+                      Confirm which models are affected by the battery-life issue, then respond to owners in Reddit r/VacuumCleaners.
                     </p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="shrink-0 rounded bg-accent/20 px-1.5 py-0.5 text-[9px] font-bold text-accent">P1</span>
+                    <span className="shrink-0 rounded bg-accent/20 px-1.5 py-0.5 text-[9px] font-bold text-accent">This week</span>
                     <p className="text-xs text-primary/80 leading-relaxed">
-                      Repurpose high-engagement TikTok content to Instagram Reels — estimated 15% conversion lift.
+                      Adapt the strongest TikTok review into an Instagram Reel, then compare completion and conversion rates across both channels.
                     </p>
                   </div>
                 </div>

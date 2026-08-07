@@ -107,7 +107,7 @@ export function CtaBlock({
 
   const accent = resolveAccent(color, customColor);
   const resolvedVariant: CtaPlacement = variant ?? (placement === 'sidebar' ? 'sidebar' : 'inline');
-  const resolvedLabel = (label && label.trim()) || (lang === 'en' ? 'Get started' : '立即开始');
+  const resolvedLabel = (label && label.trim()) || (lang === 'en' ? 'Try DataScaler' : '免费体验 DataScaler');
   const hasCopy = Boolean(eyebrow || title || description);
   const external = newTab !== false;
 

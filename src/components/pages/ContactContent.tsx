@@ -1,10 +1,9 @@
 'use client';
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Shield, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { PricingHeader } from "@/components/PricingHeader";
 import { PricingFooter } from "@/components/PricingFooter";
@@ -31,7 +30,7 @@ export function ContactContent() {
         body: JSON.stringify(form),
       });
       if (response.ok) {
-        alert("已收到您的请求，我们将尽快联系您。");
+        alert("已收到你的信息，我们会尽快联系你。");
         setForm({ name: "", email: "", company: "", desc: "" });
       } else {
         alert("提交失败，请稍后重试。");
@@ -58,10 +57,10 @@ export function ContactContent() {
           {/* Left: Text */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-6">
-              与情报专家对话
+              聊聊你想看清的市场问题
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-10 max-w-lg">
-              无论是深度竞品穿透，还是全球市场信号捕捉，我们的专家团队随时为您提供支持。
+              告诉我们你关注的品牌、市场和决策问题。我们会结合具体场景展示 DataScaler 如何帮你查数据、看结论和追溯原帖。
             </p>
 
             <div className="space-y-6">
@@ -70,9 +69,9 @@ export function ContactContent() {
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground text-sm">战略合作</p>
-                  <p className="text-sm text-muted-foreground"><p className="text-sm text-muted-foreground">support@datascaler.ai</p></p>
-                  <p className="text-xs text-muted-foreground/70 mt-0.5">大客户与 API 集成</p>
+                  <p className="font-semibold text-foreground text-sm">产品与合作咨询</p>
+                  <p className="text-sm text-muted-foreground">support@datascaler.ai</p>
+                  <p className="text-xs text-muted-foreground/70 mt-0.5">企业方案、API 与合作</p>
                 </div>
               </div>
             </div>
@@ -94,7 +93,7 @@ export function ContactContent() {
                 <Label htmlFor="name" className="text-sm text-muted-foreground mb-1.5 block">姓名</Label>
                 <Input
                   id="name"
-                  placeholder="您的姓名"
+                  placeholder="怎么称呼你"
                   required
                   className="bg-background/50"
                   value={form.name}
@@ -116,7 +115,7 @@ export function ContactContent() {
                 />
               </div>
               <div>
-                <Label htmlFor="brand" className="text-sm text-muted-foreground mb-1.5 block">核心关注品牌</Label>
+                <Label htmlFor="brand" className="text-sm text-muted-foreground mb-1.5 block">希望分析的品牌</Label>
                 <Input
                   id="brand"
                   placeholder="例如：Anker, DJI, SHEIN..."
@@ -129,7 +128,7 @@ export function ContactContent() {
               </div>
               <Button type="submit" disabled={loading} className="w-full rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/85 gap-2">
                 <Send className="h-4 w-4" />
-                {loading ? "提交中..." : "预约演示"}
+                {loading ? "正在提交……" : "联系我们"}
               </Button>
             </form>
           </motion.div>

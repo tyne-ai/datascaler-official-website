@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { IndexContent } from '@/components/pages/IndexContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'DataScaler AI | 从全球用户声音中发现增长信号',
+  title: 'DataScaler | 看懂海外用户，找到增长机会',
   description:
-    '分析海外社媒、社区与评论中的公开讨论，识别真实需求、信任缺口与潜在风险。',
+    '汇总海外社媒、社区和评论里的公开讨论，帮出海团队看清用户需求、购买顾虑和潜在风险。每条结论都能回到原帖核验。',
   canonical: '/',
 });
 

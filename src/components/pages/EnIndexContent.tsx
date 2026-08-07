@@ -57,9 +57,9 @@ function HeroSearchInput() {
         <div className="relative flex items-center gap-2 rounded-xl border border-border/50 bg-card/60 backdrop-blur-md p-2">
           <Search className="ml-3 h-5 w-5 text-muted-foreground" />
           <Input
-            aria-label="Brand domain search"
+            aria-label="Brand name or domain"
             className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 focus-visible:ring-offset-0"
-            placeholder="Enter your brand domain..."
+            placeholder="Enter a brand name or domain..."
           />
           <a
             href="https://app.datascaler.ai/plans"
@@ -69,7 +69,7 @@ function HeroSearchInput() {
             onClick={() => track("sign_up_click", { button_location: "hero", cta_type: "free_report" })}
           >
             <Button size="sm" className="shrink-0 bg-primary text-primary-foreground font-semibold hover:bg-primary/80 glow-primary">
-              Try it on my brand →
+              Analyze my brand →
             </Button>
           </a>
         </div>
@@ -96,7 +96,7 @@ function Hero() {
         <motion.div variants={fadeUp} custom={0} className="mb-4">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            AI-Powered Brand Intelligence
+            Consumer intelligence, backed by source data
           </span>
         </motion.div>
 
@@ -105,13 +105,13 @@ function Hero() {
           custom={1}
           className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
         >
-          Turn Global Consumer Voices
+          See what customers want—
           <br className="mb-3" />
-          into <span className="text-gradient mt-3 inline-block">Growth Signals.</span>
+          <span className="text-gradient mt-3 inline-block">and what’s getting in the way.</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} custom={2} className="mt-5 max-w-2xl text-base leading-relaxed text-secondary-foreground md:text-lg md:leading-relaxed">
-          Analyze public conversations across social platforms, communities, and reviews to uncover demand, trust gaps, and emerging risks.
+          DataScaler brings public posts, reviews, and community conversations into one view, so your team can spot demand, objections, and emerging risks. Every insight links back to the source.
         </motion.p>
 
         <div className="mt-10">
@@ -121,7 +121,7 @@ function Hero() {
         {/* Platform Strip — all 9 sources surfaced in the hero */}
         <motion.div variants={fadeUp} custom={4} className="mt-8 w-full max-w-3xl">
           <div className="mb-3 text-center text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
-            Sources · 9 public platforms
+            Coverage across 9 public platforms
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {PLATFORMS.map((name) => (
@@ -146,16 +146,16 @@ function Hero() {
 // ─── Pain Points ─────────────────────────────────────────
 const painPoints = [
   {
-    quote: "Where did this number come from?",
-    desc: "It's the first question every CMO asks. Most AI tools don't have an answer. We link every claim back to the post it came from — so when someone asks, you've got it.",
+    quote: "Can I see the source?",
+    desc: "Yes. Open any insight to see the post, comment, and engagement data behind it.",
   },
   {
-    quote: "Either too shallow, or the wrong cadence.",
-    desc: "Other tools come with one setting and no knob. We let you tune the depth — one page to ten — and the cadence, to match your brand and budget.",
+    quote: "What actually needs our attention today?",
+    desc: "DataScaler pulls scattered signals into one place and ranks the changes worth investigating first.",
   },
   {
     quote: "Ratings dropped. We don't know why.",
-    desc: "We do. We surface the exact review, creator, or thread moving the needle — and we link straight to it.",
+    desc: "Trace the change to the review, creator, or community thread driving it—without digging through every channel by hand.",
   },
 ];
 
@@ -171,10 +171,10 @@ function PainPoints() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            Stop paying for AI you can't defend.
+            Skip the black-box summary.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Evidence you can actually point to when someone asks where it came from.
+            Get the takeaway, the evidence behind it, and a clear next step.
           </motion.p>
         </motion.div>
 
@@ -217,10 +217,10 @@ function CoreBrief() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            Reimagined workflow: conclusions first, evidence on demand
+            Start with the answer. Dig into the evidence when you need it.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            AI insight brief + a transparent evidence chain: click [Ref] to trace back to original posts.
+            Read the week’s key changes in one page, then open any [Ref] to inspect the source.
           </motion.p>
         </motion.div>
 
@@ -237,16 +237,16 @@ function CoreBrief() {
                 <FileText className="h-5 w-5 text-ring" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">
-                AI brief + transparent evidence chain
+                A weekly brief your team can use
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Conclusions first: scan this week's momentum, sentiment shifts, and competitor gaps in one brief. Every claim is tagged with <span className="text-ring font-semibold">[Ref]</span> so you can open the underlying posts and threads — evidence included.
+                Review shifts in conversation, customer sentiment, and competitor activity in about 30 seconds. Every claim includes a <span className="text-ring font-semibold">[Ref]</span> your team can verify on the spot.
               </p>
               <div className="space-y-3">
                 {[
                   "Click [Ref] to open an Evidence Card",
                   "See original posts, sentiment labels, and engagement signals",
-                  "Transparent by design: every claim is traceable and verifiable",
+                  "Verify claims during the meeting instead of chasing sources later",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Zap className="h-3.5 w-3.5 text-primary shrink-0" />
@@ -288,10 +288,10 @@ function CompetitorIntel() {
             </span>
           </motion.div>
           <motion.h2 variants={fadeUp} custom={1} className="font-display text-3xl font-bold md:text-4xl" style={{ color: "#F8FAFC" }}>
-            Detect competitor moves across channels — diagnose cross‑platform gaps in one click
+            See where competitors are gaining ground
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            The assistant surfaces competitor momentum, risks, and opportunities from public signals — so teams can react early and plan decisively.
+            Compare conversation volume, customer sentiment, and content performance across channels to see where you lead, where you lag, and where the opening is.
           </motion.p>
         </motion.div>
 
@@ -325,10 +325,10 @@ function CopilotSection() {
           className="text-center"
         >
           <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-4xl">
-            From "what just happened" to "what to do about it," in seconds.
+            Go from signal to next step without digging through dashboards.
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            A screen-aware assistant traces every change to its cause in real time, and turns it into a prioritized Action Board.
+            Ask questions about the data in front of you, trace changes back to their source, and turn the findings into a prioritized action list.
           </motion.p>
         </motion.div>
 
@@ -341,7 +341,7 @@ function CopilotSection() {
           className="mt-12 mx-auto max-w-5xl"
         >
           <motion.p variants={fadeUp} className="text-center text-xs text-muted-foreground mb-6">
-            Try asking · Real questions global teams bring in every week
+            Questions brand teams ask every week
           </motion.p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
@@ -391,7 +391,7 @@ function CopilotSection() {
 const plans = [
   {
     name: "Free",
-    subtitle: "Free forever · No card required",
+    subtitle: "Try the full workflow",
     monthly: 0,
     icon: Star,
     badge: null,
@@ -402,13 +402,13 @@ const plans = [
       { label: "Export", value: "Not supported" },
       { label: "Seats", value: "1" },
     ],
-    cta: "Get started",
+    cta: "Start free",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
   },
   {
     name: "Pro",
-    subtitle: "Best for growing brands",
+    subtitle: "Ongoing tracking for one brand",
     monthly: 199,
     icon: Zap,
     badge: "MOST POPULAR",
@@ -419,13 +419,13 @@ const plans = [
       { label: "Export", value: "1,000 / mo" },
       { label: "Seats", value: "1" },
     ],
-    cta: "Choose Pro",
+    cta: "Start with Pro",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
   },
   {
     name: "Team",
-    subtitle: "Multi-brand collaboration",
+    subtitle: "Built for multi-brand teams",
     monthly: 499,
     icon: Users,
     badge: null,
@@ -433,9 +433,8 @@ const plans = [
       { label: "Brands", value: "3" },
       { label: "Reports / mo", value: "9" },
       { label: "Deep questions / mo", value: "300" },
-      { label: "Export", value: "Unlimited" },
+      { label: "Export", value: "3,000 / mo" },
       { label: "Seats", value: "5" },
-      { label: "AI rate limit", value: "3 rpm" },
     ],
     cta: "Book a demo",
     href: null,
@@ -443,7 +442,7 @@ const plans = [
   },
   {
     name: "Enterprise",
-    subtitle: "Custom for global brands",
+    subtitle: "More coverage and higher volume",
     monthly: 1299,
     icon: Building2,
     badge: null,
@@ -451,9 +450,8 @@ const plans = [
       { label: "Brands", value: "8" },
       { label: "Reports / mo", value: "25" },
       { label: "Deep questions / mo", value: "1,000" },
-      { label: "Export", value: "Unlimited" },
+      { label: "Export", value: "10,000 / mo" },
       { label: "Seats", value: "10" },
-      { label: "AI rate limit", value: "3 rpm" },
     ],
     cta: "Contact sales",
     href: null,
@@ -483,10 +481,10 @@ function PricingSection() {
             </span>
           </motion.div>
           <motion.h2 variants={fadeUp} custom={1} className="mt-6 font-display text-3xl font-bold text-foreground md:text-4xl">
-            Simple, transparent pricing
+            Plans that grow with your research needs
           </motion.h2>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Pick a plan → Need more → Top up Credits
+            Start free. Upgrade when you need more reports, seats, or data.
           </motion.p>
         </div>
 
@@ -615,7 +613,7 @@ function PricingSection() {
         {/* See full pricing link */}
         <motion.div variants={fadeUp} custom={8} className="mt-8 text-center">
           <a href="/en/pricing" className="text-sm font-medium text-ring hover:text-ring/80 transition-colors">
-            See full pricing →
+            Compare plans and usage limits →
           </a>
         </motion.div>
       </motion.div>
@@ -627,9 +625,9 @@ function PricingSection() {
 
 // ─── Social Proof ────────────────────────────────────────
 const proofStats = [
-  { value: "200+", label: "Brands" },
+  { value: "300+", label: "Brands served" },
   { value: "9", label: "Public platforms" },
-  { value: "100%", label: "Every claim, sourced" },
+  { value: "Source", label: "Links included" },
 ];
 
 const proofQuotes = [
@@ -665,7 +663,7 @@ function SocialProof() {
         className="relative z-10 mx-auto max-w-6xl"
       >
         <motion.h2 variants={fadeUp} className="text-center font-display text-2xl font-bold text-foreground md:text-4xl">
-          Trusted by global brands to see what their customers see
+          Trusted by 300+ teams building global brands
         </motion.h2>
 
         {/* Stats */}
@@ -717,7 +715,7 @@ function FooterCTA() {
         className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-          Make every decision <span className="text-gradient">one you can defend.</span>
+          See what customers are saying <span className="text-gradient">before you decide what to do next.</span>
         </motion.h2>
         <motion.div variants={fadeUp} custom={1} className="mt-10">
           <a href="https://app.datascaler.ai/plans" target="_blank" rel="noopener noreferrer">
@@ -725,7 +723,7 @@ function FooterCTA() {
               size="lg"
               className="glow-primary bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/80"
             >
-              Try it on my brand →
+              Analyze my brand →
             </Button>
           </a>
         </motion.div>

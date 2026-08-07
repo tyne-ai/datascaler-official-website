@@ -45,7 +45,7 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
   return (
     <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/5">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link href={isEn ? '/en' : '/'} aria-label="DataScaler home">
+        <Link href={isEn ? '/en' : '/'} aria-label={isEn ? 'DataScaler home' : 'DataScaler 首页'}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo_text.png" alt="DataScaler" className="h-8 w-auto" />
         </Link>
@@ -74,7 +74,7 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
               size="sm"
               className="rounded-full bg-[#22c55e] px-5 text-sm font-bold text-slate-950 hover:bg-[#22c55e]/85 shadow-[0_0_16px_rgba(34,197,94,0.3)]"
             >
-              {isEn ? 'Get started' : '开始体验'}
+              {isEn ? 'Start free' : '免费体验'}
             </Button>
           </a>
           <button
@@ -96,12 +96,12 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
               size="sm"
               className="rounded-full bg-[#22c55e] px-4 text-xs font-bold text-slate-950 hover:bg-[#22c55e]/85"
             >
-              {isEn ? 'Get started' : '开始体验'}
+              {isEn ? 'Start free' : '免费体验'}
             </Button>
           </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? (isEn ? 'Close menu' : '关闭菜单') : (isEn ? 'Open menu' : '打开菜单')}
             aria-expanded={mobileOpen}
             className="p-2 text-slate-400 hover:text-white transition-colors"
           >
