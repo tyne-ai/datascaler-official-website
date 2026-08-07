@@ -13,17 +13,17 @@ interface BlogListViewProps {
 const COPY = {
   zh: {
     kicker: 'DataScaler 博客',
-    title: '品牌情报、社交聆听与竞争信号的洞察',
-    sub: '来自 DataScaler 团队的研究、基准与可直接用于决策的视角。',
-    read: '阅读全文',
-    empty: '暂无文章。',
+    title: '看懂消费者，也看懂市场变化',
+    sub: 'DataScaler 团队分享的行业数据、消费者讨论和实际分析方法。',
+    read: '查看文章',
+    empty: '还没有发布文章。',
   },
   en: {
     kicker: 'DataScaler Blog',
-    title: 'Insights on brand intelligence, social listening, and competitive signal',
-    sub: 'Research, benchmarks, and decision-ready perspectives from the DataScaler team.',
-    read: 'Read article',
-    empty: 'No articles yet.',
+    title: 'What customer conversations reveal about your market',
+    sub: 'Practical research and analysis from the DataScaler team, grounded in public posts, reviews, and community discussions.',
+    read: 'Read the article',
+    empty: 'No articles have been published yet.',
   },
 };
 

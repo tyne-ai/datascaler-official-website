@@ -27,16 +27,16 @@ const VERDICTS: Record<
   { platform: string; value: string; label: string; type: "negative" | "positive" }[]
 > = {
   "Competitor A": [
-    { platform: "TikTok", value: "-23% Gap", label: "Unboxing challenge behind", type: "negative" },
-    { platform: "Reddit", value: "+45% Opp", label: "Community voice opportunity", type: "positive" },
+    { platform: "TikTok", value: "23% lower", label: "Unboxing engagement", type: "negative" },
+    { platform: "Reddit", value: "45% higher", label: "Conversation growth", type: "positive" },
   ],
   "Competitor B": [
-    { platform: "Instagram", value: "-18% Gap", label: "Visual content lagging", type: "negative" },
-    { platform: "YouTube", value: "+32% Opp", label: "Long-form video growth", type: "positive" },
+    { platform: "Instagram", value: "18% lower", label: "Visual engagement", type: "negative" },
+    { platform: "YouTube", value: "32% higher", label: "Long-form conversation", type: "positive" },
   ],
   "Competitor C": [
-    { platform: "Facebook", value: "-11% Gap", label: "Community engagement weak", type: "negative" },
-    { platform: "Pinterest", value: "+27% Opp", label: "Inspiration content potential", type: "positive" },
+    { platform: "Facebook", value: "11% lower", label: "Community engagement", type: "negative" },
+    { platform: "Pinterest", value: "27% higher", label: "Saves on inspiration posts", type: "positive" },
   ],
 };
 
@@ -96,7 +96,7 @@ export default function CompetitorDashboard() {
           <div className="flex items-center gap-1.5">
             <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-[10px] font-semibold text-muted-foreground tracking-wide uppercase">
-              AI Detection Terminal
+              Competitor comparison
             </span>
           </div>
 
@@ -105,7 +105,7 @@ export default function CompetitorDashboard() {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-1.5 rounded-md border border-border/40 bg-secondary/30 backdrop-blur-sm px-2 py-1 text-[10px] font-medium text-foreground hover:border-ring/40 transition-colors"
             >
-              <span className="text-muted-foreground">Benchmarking:</span>
+              <span className="text-muted-foreground">Compare with:</span>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={competitor}
@@ -264,7 +264,7 @@ export default function CompetitorDashboard() {
                                 >
                                   <p className="text-[9px] text-muted-foreground leading-relaxed">
                                     <Info className="inline h-2.5 w-2.5 text-ring mr-0.5 -mt-0.5" />
-                                    Every conclusion is traceable to original social media posts and comments.
+                                    Open the source posts and comments behind this comparison.
                                   </p>
                                 </motion.div>
                               )}
@@ -289,7 +289,7 @@ export default function CompetitorDashboard() {
                   exit={{ opacity: 0, y: -4 }}
                   className="text-[11px] font-mono text-muted-foreground"
                 >
-                  Locking {competitor}...{" "}
+                  Matching {competitor}…{" "}
                   <span className="text-foreground font-semibold">{domains[scanIdx]}</span>
                 </motion.p>
               )}
@@ -301,7 +301,7 @@ export default function CompetitorDashboard() {
                   exit={{ opacity: 0, y: -4 }}
                   className="text-[11px] font-mono"
                 >
-                  <span className="text-primary font-bold">✓ LOCKED:</span>{" "}
+                  <span className="text-primary font-bold">✓ MATCHED:</span>{" "}
                   <span className="text-foreground font-semibold">{competitor}</span>
                 </motion.p>
               )}
@@ -310,7 +310,7 @@ export default function CompetitorDashboard() {
 
           <div className="mt-5 flex flex-col items-center gap-1.5">
             <p className="text-[10px] text-muted-foreground/50 tracking-wide">
-              Your AI Assistant is now analyzing these gaps below...
+              The comparison is ready to explore with the AI assistant
             </p>
             <motion.div
               animate={{ y: [0, 5, 0] }}

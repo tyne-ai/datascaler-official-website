@@ -7,9 +7,9 @@ import type { Post } from '@/payload-types';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Blog — DataScaler Brand Intelligence',
+  title: 'Blog | DataScaler',
   description:
-    'Research, benchmarks, and decision-ready perspectives on brand intelligence, social listening, and competitive signal.',
+    'Practical research and analysis grounded in public posts, reviews, and community conversations.',
   canonical: '/en/blog',
 });
 

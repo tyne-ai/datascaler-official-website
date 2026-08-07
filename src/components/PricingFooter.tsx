@@ -27,24 +27,24 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
 
   const data = isEn
     ? {
-        tagline: 'AI-Powered Brand Competitive Intelligence Engine',
+        tagline: 'Consumer intelligence built from public conversations.',
         col2: {
-          title: 'Intelligence Services',
+          title: 'Product',
           links: [
-            { label: 'Pricing Plans', href: '/en/pricing' },
+            { label: 'Pricing', href: '/en/pricing' },
             { label: 'Blog', href: '/en/blog' },
             { label: 'FAQ', href: '/en/faq' },
           ],
         },
         col3: {
-          title: 'Expert Support',
+          title: 'Company',
           links: [
-            { label: 'Contact Us', href: '/en/contact' },
-            { label: 'Book Expert Demo', href: '/en/contact' },
+            { label: 'Contact', href: '/en/contact' },
+            { label: 'Book a demo', href: '/en/contact' },
           ],
         },
         col4: {
-          title: 'Compliance & Legal',
+          title: 'Legal',
           links: [
             { label: 'Terms of Service', href: '/en/terms' },
             { label: 'Privacy Policy', href: '/en/privacy' },
@@ -52,9 +52,9 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         },
       }
     : {
-        tagline: 'AI 驱动的品牌竞品情报引擎',
+        tagline: '帮出海团队看懂海外消费者的公开讨论。',
         col2: {
-          title: '情报服务',
+          title: '产品',
           links: [
             { label: '定价方案', href: '/pricing' },
             { label: '博客', href: '/blog' },
@@ -62,14 +62,14 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
           ],
         },
         col3: {
-          title: '专家支持',
+          title: '公司',
           links: [
             { label: '联系我们', href: '/contact' },
-            { label: '预约专家演示', href: '/contact' },
+            { label: '预约演示', href: '/contact' },
           ],
         },
         col4: {
-          title: '合规与法律',
+          title: '法律',
           links: [
             { label: '服务协议', href: '/terms' },
             { label: '隐私政策', href: '/privacy' },
@@ -85,7 +85,7 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
       <div className="mx-auto max-w-6xl px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href={isEn ? '/en' : '/'} aria-label="DataScaler home">
+            <Link href={isEn ? '/en' : '/'} aria-label={isEn ? 'DataScaler home' : 'DataScaler 首页'}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo_text.png" alt="DataScaler" className="h-8 w-auto" />
             </Link>
@@ -121,7 +121,9 @@ export function PricingFooter({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         </div>
 
         <div className="mt-12 flex flex-col items-start gap-4 border-t border-white/5 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-slate-500">&copy; 2026 DataScaler. All rights reserved.</p>
+          <p className="text-xs text-slate-500">
+            {isEn ? '© 2026 DataScaler. All rights reserved.' : '© 2026 DataScaler。保留所有权利。'}
+          </p>
           <button
             onClick={handleLangSwitch}
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors duration-200"

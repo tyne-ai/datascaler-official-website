@@ -26,25 +26,25 @@ const VERDICTS: Record<
   string,
   { platform: string; value: string; label: string; type: "negative" | "positive" }[]
 > = {
-  "Competitor A": [
-    { platform: "TikTok", value: "-23% Gap", label: "开箱挑战落后", type: "negative" },
-    { platform: "Reddit", value: "+45% Opp", label: "社区声量机会", type: "positive" },
+  "竞品 A": [
+    { platform: "TikTok", value: "低 23%", label: "开箱内容互动偏低", type: "negative" },
+    { platform: "Reddit", value: "高 45%", label: "社区讨论增长更快", type: "positive" },
   ],
-  "Competitor B": [
-    { platform: "Instagram", value: "-18% Gap", label: "视觉内容滞后", type: "negative" },
-    { platform: "YouTube", value: "+32% Opp", label: "长视频增长点", type: "positive" },
+  "竞品 B": [
+    { platform: "Instagram", value: "低 18%", label: "视觉内容互动偏低", type: "negative" },
+    { platform: "YouTube", value: "高 32%", label: "长视频讨论更活跃", type: "positive" },
   ],
-  "Competitor C": [
-    { platform: "Facebook", value: "-11% Gap", label: "社群运营薄弱", type: "negative" },
-    { platform: "Pinterest", value: "+27% Opp", label: "灵感图文潜力", type: "positive" },
+  "竞品 C": [
+    { platform: "Facebook", value: "低 11%", label: "社群互动偏低", type: "negative" },
+    { platform: "Pinterest", value: "高 27%", label: "灵感图文收藏更多", type: "positive" },
   ],
 };
 
-const COMPETITORS = ["Competitor A", "Competitor B", "Competitor C"];
+const COMPETITORS = ["竞品 A", "竞品 B", "竞品 C"];
 const SCAN_DOMAINS: Record<string, string[]> = {
-  "Competitor A": ["samsung.com", "govee.com", "anker.com"],
-  "Competitor B": ["roborock.com", "ecovacs.com", "irobot.com"],
-  "Competitor C": ["dyson.com", "philips.com", "xiaomi.com"],
+  "竞品 A": ["samsung.com", "govee.com", "anker.com"],
+  "竞品 B": ["roborock.com", "ecovacs.com", "irobot.com"],
+  "竞品 C": ["dyson.com", "philips.com", "xiaomi.com"],
 };
 
 export default function CompetitorDashboard() {
@@ -101,7 +101,7 @@ export default function CompetitorDashboard() {
           <div className="flex items-center gap-1.5">
             <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-[10px] font-semibold text-muted-foreground tracking-wide uppercase">
-              AI Detection Terminal
+              竞品对比
             </span>
           </div>
 
@@ -111,7 +111,7 @@ export default function CompetitorDashboard() {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-1.5 rounded-md border border-border/40 bg-secondary/30 backdrop-blur-sm px-2 py-1 text-[10px] font-medium text-foreground hover:border-ring/40 transition-colors"
             >
-              <span className="text-muted-foreground">Benchmarking:</span>
+              <span className="text-muted-foreground">当前对比：</span>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={competitor}
@@ -307,7 +307,7 @@ export default function CompetitorDashboard() {
                   exit={{ opacity: 0, y: -4 }}
                   className="text-[11px] font-mono text-muted-foreground"
                 >
-                  Locking {competitor}...{" "}
+                  正在匹配 {competitor}…{" "}
                   <span className="text-foreground font-semibold">{domains[scanIdx]}</span>
                 </motion.p>
               )}
@@ -319,7 +319,7 @@ export default function CompetitorDashboard() {
                   exit={{ opacity: 0, y: -4 }}
                   className="text-[11px] font-mono"
                 >
-                  <span className="text-primary font-bold">✓ LOCKED:</span>{" "}
+                  <span className="text-primary font-bold">✓ 已匹配：</span>{" "}
                   <span className="text-foreground font-semibold">{competitor}</span>
                 </motion.p>
               )}
@@ -329,7 +329,7 @@ export default function CompetitorDashboard() {
           {/* Action pointer */}
           <div className="mt-5 flex flex-col items-center gap-1.5">
             <p className="text-[10px] text-muted-foreground/50 tracking-wide">
-              Your AI Assistant is now analyzing these gaps below...
+              已将对比结果同步给 AI 助手
             </p>
             <motion.div
               animate={{ y: [0, 5, 0] }}

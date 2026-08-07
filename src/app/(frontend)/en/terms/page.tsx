@@ -5,7 +5,7 @@ import { TermsEnContent } from '@/components/pages/TermsEnContent';
 export const metadata: Metadata = buildMetadata({
   title: 'Terms of Service — DataScaler',
   description:
-    'DataScaler Terms of Service: service definition, IP, acceptable use, limitation of liability, and data compliance.',
+    'Review the DataScaler service terms, including acceptable use, intellectual property, data use, disclaimers, and liability limits.',
   canonical: '/en/terms',
 });
 

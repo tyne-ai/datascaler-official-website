@@ -1,10 +1,9 @@
 'use client';
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Shield, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { PricingHeader } from "@/components/PricingHeader";
 import { PricingFooter } from "@/components/PricingFooter";
@@ -56,10 +55,10 @@ export function ContactEnContent() {
         <div className="relative mx-auto max-w-6xl grid gap-16 lg:grid-cols-2 items-start">
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-6">
-              Talk to an Intelligence Expert
+              Let’s talk about what you’re trying to learn
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-10 max-w-lg">
-              Whether you need deep competitor analysis or global market signal capture, our expert team is ready to support you.
+              Tell us about the brand, market, or decision you’re working on. We’ll show you how DataScaler brings the relevant conversations together and links every finding back to the source.
             </p>
 
             <div className="space-y-6">
@@ -68,9 +67,9 @@ export function ContactEnContent() {
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground text-sm">Strategic Partnerships</p>
-                  <p className="text-sm text-muted-foreground"><p className="text-sm text-muted-foreground">support@datascaler.ai</p></p>
-                  <p className="text-xs text-muted-foreground/70 mt-0.5">Enterprise & API Integration</p>
+                  <p className="font-semibold text-foreground text-sm">Product and partnership questions</p>
+                  <p className="text-sm text-muted-foreground">support@datascaler.ai</p>
+                  <p className="text-xs text-muted-foreground/70 mt-0.5">Enterprise plans, API access, and partnerships</p>
                 </div>
               </div>
             </div>
@@ -113,7 +112,7 @@ export function ContactEnContent() {
                 />
               </div>
               <div>
-                <Label htmlFor="brand" className="text-sm text-muted-foreground mb-1.5 block">Key Brands of Interest</Label>
+                <Label htmlFor="brand" className="text-sm text-muted-foreground mb-1.5 block">Brand you want to analyze</Label>
                 <Input
                   id="brand"
                   placeholder="e.g. Anker, DJI, SHEIN..."
@@ -126,7 +125,7 @@ export function ContactEnContent() {
               </div>
               <Button type="submit" disabled={loading} className="w-full rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/85 gap-2">
                 <Send className="h-4 w-4" />
-                {loading ? "Sending..." : "Request a Demo"}
+                {loading ? "Sending…" : "Talk to our team"}
               </Button>
             </form>
           </motion.div>

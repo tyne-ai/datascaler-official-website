@@ -1,48 +1,47 @@
 'use client';
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Send, Sparkles, AlertTriangle, CheckCircle2, Clock, ArrowRight } from "lucide-react";
 
 const chatMessages = [
-  { role: "user" as const, text: "Why did negative reviews for this product spike suddenly?" },
+  { role: "user" as const, text: "What caused the recent spike in negative reviews?" },
   {
     role: "ai" as const,
-    text: 'Based on the Reddit data you selected, r/RobotVacuums saw a wave of complaints about "battery life" in the last 3 days. The source is a viral post with 342 upvotes — 67% of comments mention "battery drains fast after 3 months."',
-    refs: ["Reddit r/RobotVacuums", "342-upvote thread"],
+    text: 'Battery-life complaints rose sharply in r/RobotVacuums over the past three days. Most of the activity came from one thread with 342 upvotes, and 67% of the related comments mention faster battery drain after three months.',
+    refs: ["Reddit r/RobotVacuums", "Thread with 342 upvotes"],
   },
-  { role: "user" as const, text: "Will this trend spread? Give me an action plan." },
+  { role: "user" as const, text: "Is the conversation spreading? What should we do next?" },
   {
     role: "ai" as const,
-    text: "Based on historical propagation models, there's a 78% probability this topic spreads to YouTube review channels within 72 hours. Recommended actions:\n① Release an official battery optimization firmware update statement\n② Engage Top 3 KOLs for real-world battery test videos\n③ Add a battery lifespan FAQ to your Amazon Listing",
-    refs: ["Propagation Model v2.4", "Competitor case studies"],
+    text: "The same complaint is starting to appear in comments on YouTube review videos. First, confirm the affected models against support and firmware data. Then:\n① Explain which models are affected and what owners should do\n② Ask reviewers to retest battery life\n③ Update the battery guidance on the Amazon product page",
+    refs: ["Related YouTube comments", "30-day support conversation"],
   },
 ];
 
 const actionItems = [
   {
-    priority: "P0",
-    label: "Urgent",
+    priority: "Act now",
+    label: "Act now",
     color: "text-destructive",
     bgColor: "bg-destructive/10",
     borderClass: "p0-breathing",
-    title: '"Battery life" complaints surging — respond within 48h',
-    consequence: "If unaddressed: negative volume projected to spread to YouTube reviews within 72h",
-    actions: ["Publish firmware update statement", "Engage 3 top KOLs"],
+    title: "Battery-life complaints are rising and need verification",
+    consequence: "The same issue is now appearing in YouTube review comments",
+    actions: ["Check support data", "Prepare a customer response"],
   },
   {
-    priority: "P1",
-    label: "Important",
+    priority: "This week",
+    label: "This week",
     color: "text-primary",
     bgColor: "bg-primary/10",
     borderClass: "border-primary/30",
-    title: "Roborock new product launch — start benchmarking content",
-    consequence: "Window: complete comparative review within 7 days",
-    actions: ["Generate comparison framework", "Prepare KOL outreach brief"],
+    title: "Roborock launched a new model, and comparisons are picking up",
+    consequence: "The next seven days are the best window to add comparison content",
+    actions: ["Map the questions buyers are asking", "Prepare reviewer materials"],
   },
   {
-    priority: "P2",
-    label: "Monitor",
+    priority: "Watch",
+    label: "Watch",
     color: "text-accent",
     bgColor: "bg-accent/10",
     borderClass: "border-accent/20",
@@ -59,7 +58,7 @@ function TypingIndicator() {
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-1" />
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-2" />
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-3" />
-      <span className="text-[10px] text-muted-foreground ml-1">AI is analyzing on-screen data...</span>
+      <span className="text-[10px] text-muted-foreground ml-1">Reviewing the current dashboard…</span>
     </div>
   );
 }
@@ -73,7 +72,7 @@ export function CopilotChat() {
         </div>
         <div>
           <p className="text-xs font-semibold text-foreground">AI Assistant</p>
-          <p className="text-[10px] text-muted-foreground">Screen-aware • Deep Dive Mode</p>
+          <p className="text-[10px] text-muted-foreground">Uses the current dashboard · Sources included</p>
         </div>
         <div className="ml-auto flex items-center gap-1">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -141,8 +140,8 @@ export function ActionBoard() {
           <CheckCircle2 className="h-3.5 w-3.5 text-ring" />
         </div>
         <div>
-          <p className="text-xs font-semibold text-foreground">Action Board</p>
-          <p className="text-[10px] text-muted-foreground">3 items • Auto-prioritized</p>
+          <p className="text-xs font-semibold text-foreground">Next steps</p>
+          <p className="text-[10px] text-muted-foreground">3 recommendations · Ranked by priority</p>
         </div>
       </div>
 
@@ -158,9 +157,9 @@ export function ActionBoard() {
           >
             <div className="flex items-center gap-2 mb-1.5">
               <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold ${item.color} ${item.bgColor}`}>
-                {item.priority} {item.label}
+                {item.label}
               </span>
-              {item.priority === "P0" && <AlertTriangle className="h-3 w-3 text-destructive animate-pulse" />}
+              {item.priority === "Act now" && <AlertTriangle className="h-3 w-3 text-destructive animate-pulse" />}
             </div>
             <p className="text-xs font-medium text-foreground">{item.title}</p>
             {item.consequence && (

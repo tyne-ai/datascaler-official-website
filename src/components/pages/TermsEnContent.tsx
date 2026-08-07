@@ -12,33 +12,33 @@ const fadeUp = {
 const sections = [
   {
     id: 1,
-    title: "Section 1: Service Definition & Methodology",
-    body: 'DataScaler provides AI-driven attribution services based on public signals. We guarantee "100% Traceability"—all insights are anchored to our proprietary "Evidence-backed Ref" engine. Users acknowledge and accept that AI-generated insights are probabilistic and inferential. This service is designed as a decision-support tool; DataScaler disclaims all legal warranties or financial liabilities for direct or indirect business outcomes based on such insights.',
+    title: "1. The service",
+    body: "DataScaler provides AI-assisted analysis based on public signals and, where available, links key findings to viewable sources through [Ref]. AI-generated output is probabilistic and may be incomplete or inaccurate. It is intended to support research and decision-making, not to serve as the sole basis for a material business decision.",
   },
   {
     id: 2,
-    title: "Section 2: Intellectual Property",
-    body: 'Users hold exclusive rights to the specific custom "Insight Briefings" generated for them. DataScaler retains all proprietary rights to the underlying "Evidence Engine," data processing logic, algorithmic models, and non-sensitive aggregated data. Any form of reverse engineering, unauthorized automated scraping, or re-packaging of our core technology is strictly prohibited.',
+    title: "2. Intellectual property",
+    body: "Subject to applicable law, third-party rights, and any separate agreement, customers may use reports generated for their account for internal business purposes. DataScaler retains all rights in the platform, software, processing methods, models, and related technology. You may not reverse engineer, scrape, or resell the service without permission.",
   },
   {
     id: 3,
-    title: "Section 3: Acceptable Use",
-    body: "Users agree not to use the platform for: (1) Tracking non-public private information; (2) Violating the Terms of Service of target social platforms; (3) Engaging in illegal competitive practices using the insights provided. DataScaler reserves the right to terminate access immediately upon discovery of such misuse.",
+    title: "3. Acceptable use",
+    body: "You may not use the service to obtain non-public personal information, violate a third party platform’s rules, infringe another party’s rights, or engage in unlawful or unfair competitive activity. DataScaler may restrict or terminate access when it identifies misuse.",
   },
   {
     id: 4,
-    title: "Section 4: Limitation of Liability",
-    body: "Given the dynamic nature of third-party data and the inherent limitations of LLMs, DataScaler does not guarantee 100% semantic accuracy. In no event shall DataScaler's liability exceed the total fees paid by the user in the preceding 12 months.",
+    title: "4. Disclaimers and limitation of liability",
+    body: "Third-party content changes over time, and AI analysis may miss or misinterpret information. DataScaler does not warrant that all data or findings will be complete, accurate, or fit for a particular purpose. To the fullest extent permitted by law, DataScaler’s aggregate liability will not exceed the fees you paid for the service during the 12 months before the event giving rise to the claim.",
   },
   {
     id: 5,
-    title: "Section 5: Data Compliance",
-    body: 'We collect signals through public channels only. We adhere to a "Zero-Data Training Policy"—user-uploaded brand data is never used to train public AI models.',
+    title: "5. Data use",
+    body: "DataScaler processes publicly accessible signals and handles customer-submitted data as described in the Privacy Policy. Unless you give us explicit permission, uploaded brand data is not used to train public-facing AI models.",
   },
   {
     id: 6,
-    title: "Section 6: Governing Law",
-    body: "This Agreement shall be governed by local laws. Any dispute arising hereunder shall first be resolved through friendly negotiation; failing that, it shall be submitted to the designated arbitration center.",
+    title: "6. Governing law and disputes",
+    body: "The governing law and dispute process will be the terms stated in your order form, enterprise agreement, or the rules applicable to the DataScaler contracting entity. The parties will first try to resolve a dispute through good-faith discussion before using the formal process set out in the applicable agreement.",
   },
 ];
 
@@ -61,7 +61,7 @@ export function TermsEnContent() {
                 <Printer className="h-4 w-4" />
               </button>
             </div>
-            <p className="text-sm text-muted-foreground mt-2">Last Updated: March 31, 2026</p>
+            <p className="text-sm text-muted-foreground mt-2">Last updated: March 31, 2026</p>
           </motion.div>
 
           {/* Sections */}

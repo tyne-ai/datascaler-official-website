@@ -42,10 +42,10 @@ function PricingHero() {
           </span>
         </motion.div>
         <motion.h1 variants={fadeUp} custom={1} className="mt-8 font-display text-3xl font-bold text-foreground md:text-5xl">
-          定价与计费
+          选择适合团队的套餐
         </motion.h1>
         <motion.p variants={fadeUp} custom={2} className="mx-auto mt-6 max-w-[700px] text-base text-muted-foreground" style={{ lineHeight: 1.7 }}>
-          先选套餐 → 用量不够 → 购买 Credits 扩容
+          先从免费版开始。需要更多报告、账号或数据时，再升级套餐或购买积分。
         </motion.p>
       </motion.div>
     </section>
@@ -55,8 +55,8 @@ function PricingHero() {
 /* ─── 2) Plans Section (4 tiers + toggle) ─────────────── */
 const plans = [
   {
-    name: "Free 免费版",
-    subtitle: "永久免费 · 无需绑卡",
+    name: "免费版",
+    subtitle: "先体验完整流程",
     monthly: 0,
     icon: Star,
     badge: null,
@@ -66,35 +66,33 @@ const plans = [
       { label: "AI 深度追问（总计）", value: "6" },
       { label: "数据导出（条/月）", value: "不支持" },
       { label: "账号数", value: "1" },
-      { label: "AI 并发限制", value: "1 rpm" },
     ],
-    cta: "开始体验",
+    cta: "免费体验",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
     footnote: "永久免费，无需绑定信用卡，不会自动扣费；额度为一次性发放，用完后可随时升级 Pro。",
   },
   {
-    name: "Pro 专业版",
-    subtitle: "出海成长型品牌首选",
+    name: "专业版",
+    subtitle: "适合单品牌持续监测",
     monthly: 199,
     icon: Zap,
-    badge: "MOST POPULAR",
+    badge: "最受欢迎",
     metrics: [
       { label: "监控品牌数", value: "1" },
       { label: "完整报告（次/月）", value: "3" },
       { label: "AI 深度追问（次/月）", value: "60" },
       { label: "数据导出（条/月）", value: "1,000" },
       { label: "账号数", value: "1" },
-      { label: "AI 并发限制", value: "1 rpm" },
     ],
-    cta: "选择 Pro",
+    cta: "选择专业版",
     href: "https://app.datascaler.ai/plans",
     isDialog: false,
     footnote: null,
   },
   {
-    name: "Team 团队版",
-    subtitle: "多品牌、多账号协作",
+    name: "团队版",
+    subtitle: "适合多品牌团队协作",
     monthly: 499,
     icon: Users,
     badge: null,
@@ -102,9 +100,8 @@ const plans = [
       { label: "监控品牌数", value: "3" },
       { label: "完整报告（次/月）", value: "9" },
       { label: "AI 深度追问（次/月）", value: "300" },
-      { label: "数据导出（条/月）", value: "3000" },
+      { label: "数据导出（条/月）", value: "3,000" },
       { label: "账号数", value: "5" },
-      { label: "AI 并发限制", value: "3 rpm" },
     ],
     cta: "预约演示",
     href: "https://app.datascaler.ai/plans",
@@ -112,8 +109,8 @@ const plans = [
     footnote: null,
   },
   {
-    name: "Enterprise 企业版",
-    subtitle: "全球化大品牌深度定制",
+    name: "企业版",
+    subtitle: "适合更大规模的数据需求",
     monthly: 1299,
     icon: Building2,
     badge: null,
@@ -121,9 +118,8 @@ const plans = [
       { label: "监控品牌数", value: "8" },
       { label: "完整报告（次/月）", value: "25" },
       { label: "AI 深度追问（次/月）", value: "1,000" },
-      { label: "数据导出（条/月）", value: "10000" },
+      { label: "数据导出（条/月）", value: "10,000" },
       { label: "账号数", value: "10" },
-      { label: "AI 并发限制", value: "3 rpm" },
     ],
     cta: "联系销售",
     href: null,
@@ -142,8 +138,8 @@ function PlansSection() {
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="relative z-10 mx-auto max-w-6xl rounded-2xl border border-border/40 bg-card/20 backdrop-blur-sm p-8 md:p-10">
 
         <motion.div variants={fadeUp} custom={0} className="text-center mb-10">
-          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Subscription</span>
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">基础套餐</h2>
+          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">套餐</span>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">按使用需求选择</h2>
         </motion.div>
 
         {/* Toggle */}
@@ -170,7 +166,7 @@ function PlansSection() {
             const Icon = plan.icon;
             const yearlyTotal = Math.round(plan.monthly * 12 * 0.9);
             const effectiveMonthly = Math.round(yearlyTotal / 12);
-            const isPro = plan.badge === "MOST POPULAR";
+            const isPro = plan.badge === "最受欢迎";
 
             return (
               <motion.div
@@ -297,9 +293,9 @@ function CreditsSection() {
 
         {/* Header */}
         <motion.div variants={fadeUp} custom={0} className="text-center">
-          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">Credits & Add-ons</span>
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">积分与增值服务</h2>
-          <p className="mt-2 text-sm text-muted-foreground">$1 = 1 Credit · 套餐用完时按需补量</p>
+          <span className="inline-block mb-3 rounded-full border border-border/40 bg-card/30 px-3 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">积分</span>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">需要时再购买</h2>
+          <p className="mt-2 text-sm text-muted-foreground">$1 = 1 积分。套餐额度用完后，可按需购买报告、追问次数或导出额度。</p>
         </motion.div>
 
         {/* Layer 1: Top-up packs (centered, hero) */}
@@ -322,7 +318,7 @@ function CreditsSection() {
                 rel="noopener noreferrer"
                 className={`block mt-4 w-full rounded-lg text-sm font-medium py-2 transition-colors text-center ${p.tag ? "bg-primary text-primary-foreground hover:bg-primary/90" : "border border-border/50 text-foreground/80 hover:bg-card/40 hover:text-foreground"}`}
               >
-                立即充值
+                购买积分
               </a>
             </div>
           ))}
@@ -330,7 +326,7 @@ function CreditsSection() {
 
         {/* Layer 2: Consumption list (below, equal width) */}
         <motion.div variants={fadeUp} custom={2} className="space-y-4">
-          <p className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase text-center">消耗规则</p>
+          <p className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase text-center">积分如何使用</p>
           <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border/40 bg-border/30 sm:grid-cols-2 lg:grid-cols-5">
             {consumptionList.map((item) => (
               <li key={item.title} className="flex min-h-[88px] flex-col items-center justify-center gap-1.5 bg-card/10 px-3 py-4 text-center">
@@ -360,7 +356,7 @@ function CreditsSection() {
 
         {/* Validity */}
         <p className="text-[11px] text-muted-foreground/60 text-center">
-          积分12个月有效，兑换后的用量权益有效期为3个月。
+          积分有效期为 12 个月；兑换后的使用额度有效期为 3 个月。
         </p>
 
       </motion.div>
@@ -417,7 +413,7 @@ const faqsCN = [
   { q: "如何取消付费订阅？取消何时生效？", a: "你可在「账单与计划（Billing & Plans）」中取消付费订阅。取消将在当前计费周期结束后生效（以页面提示日期为准）。" },
   { q: "年付怎么计算折扣？", a: "年付按月付价格的 12 个月总价打 9 折（10% OFF）计算：年付 = 月付 × 12 × 0.9（展示金额以结算页为准）。" },
   { q: "用量不够怎么办？", a: "你可以升级到更高套餐获取更多月度配额，或购买 Credits 按量扩容（报告/追问/导出）。" },
-  { q: "积分与高阶数据源（Reddit / Amazon）如何计费？", a: "积分采用 $1 = 1 Credit，仅在套餐额度耗尽时使用。常见消耗：1）用完了加报告 —— 套餐用尽后购买 $10–$470 充值包，兑换为完整报告（70 积分/份）、AI 追问（10 积分/10 次）或数据导出（10 积分/200 条）。2）勾选 Reddit / Amazon —— 默认报告 70 积分，挂载 Reddit 数据源额外 +10 积分/份，挂载 Amazon Reviews 额外 +12 积分/份；其余 7 个默认数据源（YouTube、TikTok、X、Facebook、Instagram、Pinterest、Trustpilot）已包含在基础积分内。积分余额长期有效，兑换后的用量权益有效期 12 个月。" },
+  { q: "积分和高级数据源（Reddit / Amazon）怎么收费？", a: "$1 可购买 1 积分。积分可用于兑换完整报告（70 积分/份）、AI 追问（10 积分/10 次）或数据导出（10 积分/200 条）。每份报告默认包含 YouTube、TikTok、X、Facebook、Instagram、Pinterest 和 Trustpilot；加入 Reddit 需额外 10 积分，加入 Amazon Reviews 需额外 12 积分。积分有效期为 12 个月，兑换后的使用额度有效期为 3 个月。" },
 ];
 
 function FAQSection() {
@@ -454,12 +450,12 @@ function FooterCTA() {
       </div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.h2 variants={fadeUp} className="font-display text-3xl font-bold text-foreground md:text-5xl">
-          <span className="text-gradient">让每一次决策都有据可依</span>
+          <span className="text-gradient">先试用，再决定需要多大的额度</span>
         </motion.h2>
         <motion.div variants={fadeUp} custom={1} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="https://app.datascaler.ai/plans" target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="glow-primary bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/80">
-              开始体验
+              免费体验
             </Button>
           </a>
         </motion.div>

@@ -16,55 +16,55 @@ const fadeUp = {
 const sections = [
   {
     icon: Cpu,
-    title: "Product & Trust",
+    title: "Product and data sources",
     items: [
       {
-        q: "Why not just use a general-purpose LLM?",
-        a: "A general LLM answers from what it read during training — not from what people are actually saying right now. We pull from 9 public platforms on the cadence you set.\n\nA general LLM can't tell you where the answer came from. We link every claim back to the original post.\n\nA general LLM is a one-off chat. We give you a structured report, plus an auto-prioritized action board.",
+        q: "How is DataScaler different from asking ChatGPT?",
+        a: "General-purpose AI is useful for broad questions. DataScaler works from public posts, comments, and engagement data within the time range you choose.\n\nEach key finding includes a [Ref] so you can open the source and review the context yourself. Results are organized into reports and action lists your team can revisit and share.",
       },
       {
-        q: "How does DataScaler collect its data? Why not just use official APIs?",
-        a: 'We utilize a proprietary "Global Traffic Perception" logic that simulates real user search behavior. Unlike restrictive official APIs, our method captures the actual exposure results seen by consumers, including post details and interaction signals that APIs often miss, providing a truer reflection of market reality.',
+        q: "Where does DataScaler get its data?",
+        a: "Depending on the platform, we use public search results, permitted API access, and publicly accessible posts and comments. Available fields and update frequency vary by source. Reports retain source links so your team can review the underlying content.",
       },
       {
-        q: 'How do you ensure AI insight accuracy and solve "AI hallucination"?',
-        a: 'We eliminate "black-box" summaries through our "Evidence-backed Ref" mechanism. Every AI-generated insight is anchored to raw signals. Users can click any conclusion to view the original post on YouTube or X. We don\'t deliver guesses; we deliver evidence-backed intelligence.',
+        q: "How do you reduce the risk of inaccurate AI conclusions?",
+        a: "Key findings are linked to the posts or comments that support them whenever possible. Open any [Ref] to review the context and decide whether the finding applies to your business. DataScaler is a research aid, and important decisions should still include your team’s judgment and internal data.",
       },
       {
-        q: "How do you handle fake articles or bot noise (PR seeding)?",
-        a: 'Our system features a built-in "Bot & PR Detection Engine." The AI distinguishes between seeded PR content and organic user reviews by analyzing account behavior and semantic patterns, helping brands filter out the noise and access genuine consumer sentiment.',
+        q: "How do you handle duplicate posts, PR content, and suspicious accounts?",
+        a: "The system looks at account patterns, repeated language, and distribution behavior to flag content that may distort the picture. These flags help analysts review the data; they are not a final judgment about an account or post.",
       },
     ],
   },
   {
     icon: Globe2,
-    title: "Data & Coverage",
+    title: "Coverage and updates",
     items: [
       {
-        q: "Which platforms do you currently cover?",
-        a: "We currently provide full coverage for YouTube, X (Twitter), Facebook, Instagram, and TikTok. We are continuously optimizing and rolling out support for high-value communities like Reddit to ensure global brand signal coverage.",
+        q: "Which platforms do you cover?",
+        a: "Base reports include YouTube, TikTok, X, Facebook, Instagram, Pinterest, and Trustpilot. Reddit and Amazon Reviews are available as premium sources. Data availability and fields vary by platform.",
       },
       {
-        q: "How frequently is data refreshed?",
-        a: "The Pro plan supports weekly refreshes for routine monitoring. The Enterprise plan offers daily high-frequency refreshes and real-time anomaly alerts, ensuring brands can react instantly to crises or trending opportunities.",
+        q: "How often is the data updated?",
+        a: "Each report collects data for the time range you select. If you need recurring monitoring or more frequent updates, our team can help match the cadence and configuration to your use case.",
       },
       {
-        q: "How do you ensure data collection compliance?",
-        a: "DataScaler only collects publicly available signals and does not access private non-public data. Our methodology fully complies with global data privacy regulations, providing brands with secure and auditable competitive intelligence.",
+        q: "How do you approach data compliance?",
+        a: "DataScaler works with publicly accessible posts, comments, and engagement signals. We do not seek access to private accounts or non-public content. Processing is subject to applicable platform rules, laws, and the DataScaler Privacy Policy.",
       },
     ],
   },
   {
     icon: Users,
-    title: "Usage & Support",
+    title: "Teams and setup",
     items: [
       {
-        q: "What kind of teams is DataScaler designed for?",
-        a: "We primarily serve three types of teams: Marketing for competitor benchmarking and sentiment monitoring; Growth for identifying opportunities and trend attribution; and Strategy/Research for evidence-based market inference.",
+        q: "Which teams use DataScaler?",
+        a: "Brand, marketing, growth, insights, and research teams use DataScaler for launch feedback, competitor comparisons, review analysis, content planning, and ongoing brand monitoring.",
       },
       {
-        q: "Is there a steep learning curve? Do we need complex integrations?",
-        a: "Zero integration cost. DataScaler is a ready-to-use Web platform that requires no internal database access or plugin installations. Simply enter your brand or keywords, and our Agents start working immediately.",
+        q: "Do we need an integration before we can start?",
+        a: "No. You can start without connecting an internal database or installing a plug-in. Enter your brand, review the suggested keywords and competitors, and then generate a report.",
       },
     ],
   },
@@ -89,10 +89,10 @@ export function FaqEnContent() {
             </span>
           </motion.div>
           <motion.h1 variants={fadeUp} custom={1} className="mt-8 text-3xl font-bold text-foreground md:text-5xl leading-tight">
-            Frequently Asked Questions
+            Questions teams ask before getting started
           </motion.h1>
           <motion.p variants={fadeUp} custom={2} className="mx-auto mt-4 max-w-xl text-base text-muted-foreground" style={{ lineHeight: 1.6 }}>
-            Everything you need to know about DataScaler
+            Straight answers about the data, coverage, setup, and plans.
           </motion.p>
         </motion.div>
       </section>
@@ -135,14 +135,14 @@ export function FaqEnContent() {
       {/* Bottom conversion CTA */}
       <section className="relative px-6 pb-24">
         <div className="mx-auto max-w-3xl rounded-2xl border border-primary/30 bg-gradient-to-br from-card/70 to-primary/5 p-10 text-center backdrop-blur-md">
-          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Still have questions?</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">Have a specific use case?</h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-            Sign up free — no credit card required — and get your brand's first traceable report.
+            Start with a free brand report, or talk with our team about the coverage you need.
           </p>
           <div className="mt-7">
             <a href="https://app.datascaler.ai/plans" target="_blank" rel="noopener noreferrer" data-cta="faq_free_trial">
               <span className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-4px_hsl(142_76%_63%/0.5)] transition-colors hover:bg-primary/85">
-                Get started
+                Create a free report
               </span>
             </a>
           </div>

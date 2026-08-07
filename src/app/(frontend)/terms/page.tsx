@@ -5,7 +5,7 @@ import { TermsContent } from '@/components/pages/TermsContent';
 export const metadata: Metadata = buildMetadata({
   title: '服务协议 — DataScaler',
   description:
-    'DataScaler 服务条款：服务定义、知识产权、用户行为准则、责任限制与数据合规说明。',
+    '了解 DataScaler 的服务范围、可接受的使用方式、知识产权、数据使用和责任限制。',
   canonical: '/terms',
 });
 

@@ -1,48 +1,47 @@
 'use client';
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Send, Sparkles, AlertTriangle, CheckCircle2, Clock, ArrowRight } from "lucide-react";
 
 const chatMessages = [
-  { role: "user" as const, text: "为什么这个产品负面评论突然增多了？" },
+  { role: "user" as const, text: "这款产品的差评为什么突然变多了？" },
   {
     role: "ai" as const,
-    text: '根据您当前选中的 Reddit 数据，近 3 天 r/RobotVacuums 出现集中投诉"电池续航不足"。源头是一篇热帖获得了 342 upvotes，评论中 67% 提及了 "battery drains fast after 3 months"。',
-    refs: ["Reddit r/RobotVacuums", "342 upvotes 热帖"],
+    text: "近 3 天，Reddit r/RobotVacuums 里关于电池续航的负面讨论明显增加。主要来自一篇获得 342 次赞同的热帖，相关评论中有 67% 提到“使用 3 个月后掉电变快”。",
+    refs: ["Reddit r/RobotVacuums", "342 次赞同的帖子"],
   },
-  { role: "user" as const, text: "这个趋势会扩散吗？给我一个应对方案。" },
+  { role: "user" as const, text: "这个话题还在扩散吗？我们现在应该做什么？" },
   {
     role: "ai" as const,
-    text: "基于历史传播模型预测：该话题有 78% 概率在 72h 内扩散到 YouTube 评测圈。建议立即：\n① 发布官方电池优化固件更新声明\n② 联系 Top 3 KOL 进行续航实测视频\n③ 在 Amazon Listing 中添加电池寿命 FAQ",
-    refs: ["传播模型 v2.4", "竞品历史案例"],
+    text: "相关讨论已经出现在 YouTube 测评视频的评论区。建议先核对固件和售后数据，再安排三件事：\n① 说明受影响的型号和处理方式\n② 邀请测评创作者复测续航\n③ 更新 Amazon 商品页的电池使用说明",
+    refs: ["YouTube 相关评论", "近 30 天售后讨论"],
   },
 ];
 
 const actionItems = [
   {
-    priority: "P0",
-    label: "紧急",
+    priority: "优先处理",
+    label: "优先处理",
     color: "text-destructive",
     bgColor: "bg-destructive/10",
     borderClass: "p0-breathing",
-    title: '"电池续航"差评激增 — 需 48h 内响应',
-    consequence: "若不处理：预计负面声量 72h 内扩散至 YouTube 评测圈",
-    actions: ["发布固件更新声明", "联系 3 位头部 KOL"],
+    title: "电池续航差评增加，需尽快核实",
+    consequence: "讨论已经出现在 YouTube 测评视频的评论区",
+    actions: ["核对售后数据", "准备对外说明"],
   },
   {
-    priority: "P1",
-    label: "重要",
+    priority: "本周安排",
+    label: "本周安排",
     color: "text-primary",
     bgColor: "bg-primary/10",
     borderClass: "border-primary/30",
-    title: "竞品 Roborock 新品发布 — 启动对标内容",
-    consequence: "窗口期：7 天内需完成对比评测",
-    actions: ["生成对比评测框架", "准备 KOL 合作话术"],
+    title: "Roborock 发布新品，用户开始集中对比",
+    consequence: "最近 7 天是补充对比内容的关键时间",
+    actions: ["整理用户关心的对比点", "准备测评素材"],
   },
   {
-    priority: "P2",
-    label: "关注",
+    priority: "持续关注",
+    label: "持续关注",
     color: "text-accent",
     bgColor: "bg-accent/10",
     borderClass: "border-accent/20",
@@ -59,7 +58,7 @@ function TypingIndicator() {
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-1" />
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-2" />
       <span className="h-1.5 w-1.5 rounded-full bg-ring typing-dot-3" />
-      <span className="text-[10px] text-muted-foreground ml-1">AI 正在分析屏幕数据...</span>
+      <span className="text-[10px] text-muted-foreground ml-1">正在读取当前看板…</span>
     </div>
   );
 }
@@ -73,8 +72,8 @@ export function CopilotChat() {
           <MessageCircle className="h-3.5 w-3.5 text-ring" />
         </div>
         <div>
-          <p className="text-xs font-semibold text-foreground">AI Assistant</p>
-          <p className="text-[10px] text-muted-foreground">Screen-aware • Deep Dive Mode</p>
+          <p className="text-xs font-semibold text-foreground">AI 助手</p>
+          <p className="text-[10px] text-muted-foreground">结合当前看板回答 · 附原帖来源</p>
         </div>
         <div className="ml-auto flex items-center gap-1">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -102,7 +101,7 @@ export function CopilotChat() {
             >
               {msg.role === "ai" && (
                 <p className="text-ring font-medium text-[10px] mb-1 flex items-center gap-1">
-                  <Sparkles className="h-3 w-3" /> AI Assistant
+                  <Sparkles className="h-3 w-3" /> AI 助手
                 </p>
               )}
               <p className="whitespace-pre-line">{msg.text}</p>
@@ -145,8 +144,8 @@ export function ActionBoard() {
           <CheckCircle2 className="h-3.5 w-3.5 text-ring" />
         </div>
         <div>
-          <p className="text-xs font-semibold text-foreground">Action Board</p>
-          <p className="text-[10px] text-muted-foreground">3 items • Auto-prioritized</p>
+          <p className="text-xs font-semibold text-foreground">待办看板</p>
+          <p className="text-[10px] text-muted-foreground">3 项建议 · 按优先级排列</p>
         </div>
       </div>
 
@@ -163,9 +162,9 @@ export function ActionBoard() {
           >
             <div className="flex items-center gap-2 mb-1.5">
               <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold ${item.color} ${item.bgColor}`}>
-                {item.priority} {item.label}
+                {item.label}
               </span>
-              {item.priority === "P0" && <AlertTriangle className="h-3 w-3 text-destructive animate-pulse" />}
+              {item.priority === "优先处理" && <AlertTriangle className="h-3 w-3 text-destructive animate-pulse" />}
             </div>
             <p className="text-xs font-medium text-foreground">{item.title}</p>
             {item.consequence && (

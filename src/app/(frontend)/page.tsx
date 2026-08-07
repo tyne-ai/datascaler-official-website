@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { IndexContent } from '@/components/pages/IndexContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'DataScaler AI | 出海品牌 AI 市场舆情与增长引擎',
+  title: 'DataScaler | 看懂海外用户，找到增长机会',
   description:
-    'DataScaler 提供 100% 可溯源的 AI 市场洞察。AI Assistant 深度分析 TikTok、YouTube、Reddit 等社媒舆情，结论先行、数据验证。免费版无需绑卡，注册即用。',
+    '汇总海外社媒、社区和评论里的公开讨论，帮出海团队看清用户需求、购买顾虑和潜在风险。每条结论都能回到原帖核验。',
   canonical: '/',
 });
 

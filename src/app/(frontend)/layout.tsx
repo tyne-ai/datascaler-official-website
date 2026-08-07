@@ -24,11 +24,11 @@ const ENABLE_ANALYTICS = process.env.NODE_ENV === 'production';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'DataScaler AI | 出海品牌 AI 市场舆情与增长引擎',
+    default: 'DataScaler | 看懂海外用户，找到增长机会',
     template: '%s | DataScaler',
   },
   description:
-    'DataScaler 提供 100% 可溯源的 AI 市场洞察。AI Assistant 深度分析 TikTok、YouTube、Reddit 等社媒舆情，结论先行、数据验证。',
+    'DataScaler 汇总海外社媒、社区和评论里的公开讨论，帮出海团队看清用户需求、购买顾虑和正在冒头的风险。',
   icons: { icon: '/favicon.ico' },
   // Search Console 也支持 DNS TXT 验证,但 meta 验证不依赖 DNS 同步,生产部署后
   // 立即可验。两种方式同时存在不冲突。

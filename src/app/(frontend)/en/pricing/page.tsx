@@ -3,9 +3,9 @@ import { buildMetadata } from '@/lib/seo';
 import { PricingEnContent } from '@/components/pages/PricingEnContent';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Pricing — DataScaler AI Market Intelligence Plans',
+  title: 'Plans and Pricing | DataScaler',
   description:
-    'DataScaler plans: Free, Pro, Team, and Enterprise. A free plan with no credit card required, Credit-based billing, and fully traceable AI insights. See full pricing.',
+    'Start free, then choose a DataScaler plan based on the number of brands, reports, seats, and data your team needs. Compare plans and credit usage.',
   canonical: '/en/pricing',
 });
 

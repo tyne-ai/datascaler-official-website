@@ -5,7 +5,7 @@ import { PrivacyEnContent } from '@/components/pages/PrivacyEnContent';
 export const metadata: Metadata = buildMetadata({
   title: 'Privacy Policy — DataScaler',
   description:
-    'DataScaler Privacy Policy: data minimization, zero-knowledge training, anonymized AI processing, process-and-delete retention, and GDPR/CCPA compliance.',
+    'Learn what information DataScaler collects, how third-party AI services are used, how long data is retained, and what privacy choices are available.',
   canonical: '/en/privacy',
 });
 

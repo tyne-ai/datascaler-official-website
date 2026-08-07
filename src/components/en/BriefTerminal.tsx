@@ -7,8 +7,8 @@ import { FileText, TrendingUp, Heart, AlertTriangle, MessageSquare, ThumbsUp, Ex
 const briefLines = [
   {
     id: "sentiment",
-    text: "Overall brand sentiment this week: ",
-    highlight: "78% Positive",
+    text: "Positive conversation this week: ",
+    highlight: "78%",
     highlightColor: "text-primary",
     ref: {
       platform: "Reddit",
@@ -33,7 +33,7 @@ const briefLines = [
       user: "@cleaningpro",
       avatar: "CP",
       content: '"Suction power showdown: Dreame vs Roborock vs Dyson" — 1.2M views, 91% positive comment rate',
-      sentiment: "Viral Positive",
+      sentiment: "High reach · Positive",
       sentimentColor: "bg-primary/20 text-primary",
       upvotes: 45200,
       comments: 1893,
@@ -41,8 +41,8 @@ const briefLines = [
   },
   {
     id: "risk",
-    text: "Competitor threat signals detected: ",
-    highlight: "5 active offensives",
+    text: "Competitor conversations gaining traction: ",
+    highlight: "5 topics",
     highlightColor: "text-destructive",
     ref: {
       platform: "YouTube",
@@ -58,8 +58,8 @@ const briefLines = [
   },
   {
     id: "opportunity",
-    text: "Market opportunity window: ",
-    highlight: "Pet-owner demand surging",
+    text: "Customer need showing up more often: ",
+    highlight: "Better pet-hair pickup",
     highlightColor: "text-accent",
     ref: {
       platform: "Amazon Reviews",
@@ -85,7 +85,7 @@ export default function BriefTerminal() {
           <div className="h-2.5 w-2.5 rounded-full bg-destructive/80" />
           <div className="h-2.5 w-2.5 rounded-full bg-primary/80" />
           <div className="h-2.5 w-2.5 rounded-full bg-accent/80" />
-          <span className="ml-3 text-xs text-muted-foreground font-mono">DataScaler — AI Insight Brief v2.4</span>
+          <span className="ml-3 text-xs text-muted-foreground font-mono">DataScaler — Weekly customer intelligence</span>
           <div className="ml-auto flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-[10px] text-primary font-medium">LIVE</span>
@@ -98,8 +98,8 @@ export default function BriefTerminal() {
               <FileText className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Brand: dreame.com • Weekly Report</p>
-              <p className="text-sm font-semibold text-foreground">AI Insight Brief — Mar 10-17, 2026</p>
+              <p className="text-xs text-muted-foreground">Brand: dreame.com · Weekly report</p>
+              <p className="text-sm font-semibold text-foreground">Customer intelligence brief · Mar 10–17, 2026</p>
             </div>
           </div>
 
@@ -114,7 +114,7 @@ export default function BriefTerminal() {
             </div>
             <div className="flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5">
               <AlertTriangle className="h-3.5 w-3.5 text-destructive" />
-              <span className="text-xs font-semibold text-destructive">5 Threats</span>
+              <span className="text-xs font-semibold text-destructive">5 competitor topics</span>
             </div>
           </div>
         </div>
@@ -195,7 +195,7 @@ export default function BriefTerminal() {
         </div>
 
         <div className="border-t border-border/30 px-6 py-3 flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground">4 insights • 4 evidence sources attached</span>
+          <span className="text-[10px] text-muted-foreground">4 findings · 4 source posts attached</span>
           <button className="text-[10px] font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-1">
             Export full report <ExternalLink className="h-3 w-3" />
           </button>
