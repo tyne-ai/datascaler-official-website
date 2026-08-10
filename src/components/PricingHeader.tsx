@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Globe, Menu, X } from 'lucide-react';
 import { setLocaleCookie } from '@/lib/i18n';
+import { WatchDemoDialog } from '@/components/WatchDemoDialog';
 
 export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
   const router = useRouter();
@@ -14,6 +15,7 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
     forceLang === 'en' ||
     (forceLang === undefined && (pathname === '/en' || pathname.startsWith('/en/')));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   const handleLangSwitch = () => {
     // 记住手动选择,让 middleware 后续以 cookie 为准,不再按 Accept-Language 跳转。
@@ -43,6 +45,7 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
       ];
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/5">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href={isEn ? '/en' : '/'} aria-label="DataScaler home">
@@ -51,6 +54,15 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="text-sm text-slate-400 hover:text-white hover:bg-white/5"
+            onClick={() => setDemoOpen(true)}
+          >
+            {isEn ? 'Watch a Demo' : '观看演示'}
+          </Button>
           {menuItems.map((item) => (
             <Link key={item.label} href={item.href}>
               <Button
@@ -113,6 +125,16 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
       {mobileOpen && (
         <div className="md:hidden border-t border-white/5 bg-slate-950/95 backdrop-blur-md px-6 pb-4">
           <nav className="flex flex-col gap-1 pt-2">
+            <button
+              type="button"
+              className="block py-2.5 text-left text-sm text-slate-300 hover:text-white transition-colors"
+              onClick={() => {
+                setMobileOpen(false);
+                setDemoOpen(true);
+              }}
+            >
+              {isEn ? 'Watch a Demo' : '观看演示'}
+            </button>
             {menuItems.map((item) => (
               <Link
                 key={item.label}
@@ -139,5 +161,7 @@ export function PricingHeader({ forceLang }: { forceLang?: 'zh' | 'en' } = {}) {
         </div>
       )}
     </header>
+    <WatchDemoDialog open={demoOpen} onOpenChange={setDemoOpen} lang={isEn ? 'en' : 'zh'} />
+    </>
   );
 }
