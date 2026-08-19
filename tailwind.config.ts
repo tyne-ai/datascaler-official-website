@@ -56,7 +56,9 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
+        // 英文主字体 Inter + 中文兜底(PingFang SC / Hiragino / 微软雅黑 / Noto Sans SC)。
         sans: ['Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'system-ui', 'sans-serif'],
+        // 标题统一改用 Inter(原 Space Grotesk 不含中文字形，中文标题会掉到系统默认)。
         display: ['Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
       },
       keyframes: {

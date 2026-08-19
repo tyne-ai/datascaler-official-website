@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Watch the DataScaler product demo',
+  title: 'Preview how DataScaler works',
   robots: { index: false, follow: false },
 };
 
@@ -20,15 +20,16 @@ export default async function WatchDemoPage({ searchParams }: WatchDemoPageProps
     : '/demo/datascaler-watch-a-demo-zh.mp4';
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-[#05030b]">
+    <main className="flex min-h-dvh items-center justify-center bg-[#10091d]">
       <video
-        className="h-auto max-h-dvh w-full bg-[#05030b] object-contain"
+        className="h-auto max-h-dvh w-full bg-[#10091d] object-contain"
         autoPlay
         controls
+        muted
         playsInline
         preload="metadata"
         poster={poster}
-        aria-label={isEnglish ? 'DataScaler full product demo' : 'DataScaler 完整产品演示'}
+        aria-label={isEnglish ? 'DataScaler product flow preview' : 'DataScaler 产品流程预览'}
       >
         <source src={video} type="video/mp4" />
       </video>

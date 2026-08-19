@@ -1,14 +1,33 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 import { EnIndexContent } from '@/components/pages/EnIndexContent';
+import { JsonLd } from '@/components/JsonLd';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'DataScaler AI — AI Market Intelligence for Global Brands',
+  title: 'DataScaler | Social Listening & Consumer Intelligence for Global Brands',
   description:
-    'AI-powered competitive intelligence with 100% traceable insights from TikTok, YouTube, Reddit and more. Built for global DTC brands. Free plan — no credit card required.',
+    'DataScaler turns public posts, reviews, and Reddit threads into traceable consumer intelligence for global ecommerce brands. 10 platforms. Every finding links to the source. Try free.',
   canonical: '/en',
 });
 
 export default function Page() {
-  return <EnIndexContent />;
+  return (
+    <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'DataScaler',
+          url: `${SITE_URL}/en`,
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          description: metadata.description,
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          publisher: { '@id': `${SITE_URL}/#organization` },
+        }}
+      />
+      <EnIndexContent />
+    </>
+  );
 }

@@ -38,10 +38,10 @@ export function ArticleToc({ items, label }: ArticleTocProps) {
 
   return (
     <nav aria-label={label}>
-      <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-4 font-semibold">
+      <div className="mb-4 text-[10px] font-black uppercase tracking-[0.14em] text-[#24133f]/40">
         {label}
       </div>
-      <ul className="space-y-2 border-l border-white/10">
+      <ul className="space-y-1 border-l border-[#3d2673]/15">
         {items.map((item) => {
           const isActive = item.id === activeId;
           return (
@@ -49,10 +49,10 @@ export function ArticleToc({ items, label }: ArticleTocProps) {
               <a
                 href={`#${item.id}`}
                 className={cn(
-                  'block -ml-px border-l-2 pl-3 py-1 text-xs leading-snug transition-colors',
+                  'block -ml-px border-l-2 py-1.5 pl-3 text-xs font-semibold leading-snug transition-colors',
                   isActive
-                    ? 'border-emerald-400 text-emerald-300 font-medium'
-                    : 'border-transparent text-slate-400 hover:text-white',
+                    ? 'border-[#3d2673] text-[#24133f]'
+                    : 'border-transparent text-[#24133f]/40 hover:text-[#24133f]',
                 )}
               >
                 {item.label}

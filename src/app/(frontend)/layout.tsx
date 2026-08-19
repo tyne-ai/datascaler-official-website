@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import './globals.css';
+import { JsonLd } from '@/components/JsonLd';
 import { pathLocale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/site';
 
@@ -13,22 +14,50 @@ import { SITE_URL } from '@/lib/site';
 const GOOGLE_SITE_VERIFICATION = 'elGpozfT2dRazwgOtC1SlHwl5pmqKym7Qephpm-3WL4';
 const GA_MEASUREMENT_ID = 'G-M5NX3Y8KY6';
 const CLARITY_PROJECT_ID = 'x04rt4ltvq';
-// GTM 容器：承载官网自定义转化/意向事件（sign_up_click / plan_click / sample_report_click 等，
-// 经 dataLayer 触发）。GA4 基础 pageview 仍由上面的 gtag.js 负责——GTM 内只配 GA4「事件」代码、
-// 不要再加 GA4「配置」代码，否则 pageview 会重复计数。
-// TODO(growth): 替换为真实 GTM 容器 ID（GTM 后台 → 容器设置）。
+// GTM 容器 ID(见 PRD v3 §2.1)。GTM 后台只配 GA4「事件代码」，不要再加 GA4 配置代码，
+// 否则与下方 gtag.js 的 GA4 基础 pageview 重复计数。仅生产环境注入容器。
 const GTM_CONTAINER_ID = 'GTM-KVXS5X93';
 
 const ENABLE_ANALYTICS = process.env.NODE_ENV === 'production';
+const ENABLE_GTM = ENABLE_ANALYTICS && /^GTM-[A-Z0-9]{4,}$/.test(GTM_CONTAINER_ID);
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
+  name: 'DataScaler',
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo_text.png`,
+  description: 'Social listening and consumer intelligence for global brands.',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: 'support@datascaler.ai',
+    areaServed: 'Worldwide',
+    availableLanguage: ['English', 'Chinese'],
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: 'DataScaler',
+  url: SITE_URL,
+  publisher: { '@id': `${SITE_URL}/#organization` },
+  inLanguage: ['zh-CN', 'en'],
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${SITE_URL}/playground?brand={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: 'DataScaler AI | 出海品牌 AI 市场舆情与增长引擎',
-    template: '%s | DataScaler',
-  },
+  title: 'DataScaler AI | 出海品牌 AI 市场舆情与增长引擎',
   description:
-    'DataScaler 提供 100% 可溯源的 AI 市场洞察。AI Assistant 深度分析 TikTok、YouTube、Reddit 等社媒舆情，结论先行、数据验证。',
+    'DataScaler 监控 10 个海外公开平台的品牌讨论，每条结论都能点回原帖核验。',
   icons: { icon: '/favicon.ico' },
   // Search Console 也支持 DNS TXT 验证,但 meta 验证不依赖 DNS 同步,生产部署后
   // 立即可验。两种方式同时存在不冲突。
@@ -45,35 +74,45 @@ export default async function FrontendLayout({ children }: { children: ReactNode
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className="min-h-screen bg-background">
-        {ENABLE_ANALYTICS && (
+        <JsonLd data={[organizationSchema, websiteSchema]} />
+        {ENABLE_GTM && (
+          // GTM noscript 兜底：JS 关闭时仍能记录 pageview。需紧跟 <body> 开标签。
           <noscript>
+            {/* eslint-disable-next-line @next/next/no-sync-scripts */}
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
               height="0"
               width="0"
               style={{ display: 'none', visibility: 'hidden' }}
+              title="gtm"
             />
           </noscript>
         )}
         {children}
+        {ENABLE_GTM && (
+          <Script id="gtm-loader" strategy="afterInteractive">{`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');
+          `}</Script>
+        )}
         {ENABLE_ANALYTICS && (
           <>
-            <Script id="gtm-loader" strategy="afterInteractive">{`
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-              var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-              j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-              f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');
-            `}</Script>
             <Script
               id="ga-loader"
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
               strategy="afterInteractive"
             />
+            {/* 跨域追踪(PRD §2.2)：linker 装饰指向 app 域的出站链接(_gl 参数)，把
+                datascaler.ai 与 app.datascaler.ai 串成同一 GA4 会话，注册来源才不会变成
+                (direct)。前提:app 端需装同一 GA4 属性(G-M5NX3Y8KY6)，否则 linker 无效；
+                GA4 后台 Data Stream「配置您的域名」也应同步加入这两个域。 */}
             <Script id="ga-init" strategy="afterInteractive">{`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}');
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                linker: { domains: ['datascaler.ai', 'app.datascaler.ai'] },
+                cookie_domain: 'datascaler.ai'
+              });
             `}</Script>
             <Script id="ms-clarity" strategy="afterInteractive">{`
               (function(c,l,a,r,i,t,y){

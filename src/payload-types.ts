@@ -218,6 +218,10 @@ export interface Post {
   slug: string;
   lang: 'zh' | 'en';
   status: 'draft' | 'published';
+  /**
+   * The matching article in the OTHER language (Chinese ⇄ English). Only opposite-language posts are selectable. Set it on BOTH articles so the header language toggle jumps between them. Leave blank if no translation exists — the toggle then falls back to the blog list.
+   */
+  translation?: (number | null) | Post;
   category: string;
   /**
    * Single tag chip, e.g. "Consumer Electronics" or "消费电子"
@@ -458,6 +462,7 @@ export interface PostsSelect<T extends boolean = true> {
   slug?: T;
   lang?: T;
   status?: T;
+  translation?: T;
   category?: T;
   tag?: T;
   excerpt?: T;

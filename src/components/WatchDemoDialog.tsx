@@ -1,8 +1,7 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
-import { useEffect } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import { Play, X } from 'lucide-react';
 
 type WatchDemoDialogProps = {
   open: boolean;
@@ -12,87 +11,72 @@ type WatchDemoDialogProps = {
 
 const copy = {
   zh: {
-    title: 'DataScaler 完整产品演示',
+    title: '提前了解 DataScaler 如何工作',
+    description: '快速预览从品牌配置到洞察、原帖追溯与 AI 追问的完整流程。',
     close: '关闭产品演示',
-    frameTitle: 'DataScaler 完整产品演示播放器',
+    frameTitle: 'DataScaler 产品流程预览播放器',
+    duration: '产品流程预览 · 约 30 秒',
+    evidence: '每条洞察均可追溯至原始来源',
   },
   en: {
-    title: 'DataScaler full product demo',
+    title: 'Preview how DataScaler works',
+    description: 'A quick look at the flow from brand setup to insights, source tracing, and AI follow-ups.',
     close: 'Close product demo',
-    frameTitle: 'DataScaler full product demo player',
+    frameTitle: 'DataScaler product flow preview player',
+    duration: 'Product flow preview · about 30 sec',
+    evidence: 'Every insight links back to the source',
   },
-};
+} as const;
 
 export function WatchDemoDialog({ open, onOpenChange, lang = 'zh' }: WatchDemoDialogProps) {
   const t = copy[lang];
 
-  useEffect(() => {
-    if (!open) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onOpenChange(false);
-    };
-
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [open, onOpenChange]);
-
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <button
-            type="button"
-            className="absolute inset-0 cursor-default bg-[#05030b]/90 backdrop-blur-md"
-            aria-label={t.close}
-            onClick={() => onOpenChange(false)}
-          />
-
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="watch-demo-title"
-            className="relative z-10 w-full max-w-7xl overflow-hidden rounded-2xl border border-ring/35 bg-[#090710] shadow-2xl shadow-black/70 md:rounded-3xl"
-            initial={{ opacity: 0, scale: 0.96, y: 18 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 12 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
-          >
-            <div className="flex h-12 items-center justify-between border-b border-white/10 px-4 md:h-14 md:px-5">
-              <h2 id="watch-demo-title" className="text-sm font-semibold text-white md:text-base">
-                {t.title}
-              </h2>
-              <button
-                type="button"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-white/70 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                aria-label={t.close}
-                onClick={() => onOpenChange(false)}
-              >
-                <X className="h-5 w-5" aria-hidden="true" />
-              </button>
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-[100] bg-[#24133f]/45 backdrop-blur-sm data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:animate-in data-[state=open]:fade-in" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-[101] w-[min(1120px,calc(100vw-24px))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[24px] border border-[#3d2673]/20 bg-[#fbf9ff] shadow-[0_32px_100px_rgba(36,19,63,0.35)] outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95 sm:w-[min(1120px,calc(100vw-48px))]">
+          <div className="flex items-start justify-between gap-4 px-5 py-4 sm:items-center sm:px-6">
+            <div className="flex min-w-0 items-start gap-3 sm:items-center">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#f5ff63] text-[#24133f] shadow-[0_7px_18px_rgba(112,71,235,0.14)]">
+                <Play className="ml-0.5 h-4 w-4 fill-current" aria-hidden="true" />
+              </span>
+              <div className="min-w-0">
+                <Dialog.Title className="text-base font-black tracking-[-0.025em] text-[#24133f] sm:text-lg">
+                  {t.title}
+                </Dialog.Title>
+                <Dialog.Description className="mt-0.5 text-xs leading-5 text-[#24133f]/55 sm:text-sm">
+                  {t.description}
+                </Dialog.Description>
+              </div>
             </div>
+            <Dialog.Close
+              aria-label={t.close}
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#3d2673]/15 bg-white text-[#24133f]/60 transition hover:border-[#7047eb]/40 hover:text-[#7047eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7047eb] focus-visible:ring-offset-2"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </Dialog.Close>
+          </div>
 
+          <div className="mx-2 overflow-hidden rounded-[18px] border border-[#3d2673]/25 bg-[#10091d] sm:mx-3">
             <iframe
               src={`/demo/watch?lang=${lang}`}
               title={t.frameTitle}
-              className="aspect-video w-full bg-[#05030b]"
+              className="aspect-video w-full bg-[#10091d]"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
             />
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+
+          <div className="flex flex-col gap-1.5 px-5 py-3 text-[11px] font-bold text-[#24133f]/50 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-4 sm:text-xs">
+            <span>{t.duration}</span>
+            <span className="inline-flex items-center gap-2 text-[#24133f]/65">
+              <span className="h-2 w-2 rounded-full bg-[#7047eb]" aria-hidden="true" />
+              {t.evidence}
+            </span>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

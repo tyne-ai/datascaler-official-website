@@ -4,6 +4,8 @@
 // 这里集中维护两套路由的映射与语言判定，供 middleware(自动重定向)和
 // 页头/页脚的语言切换器复用，避免常量散落各处。
 
+import { STATIC_BLOG_EXAMPLE_ZH_PATH } from './static-blog';
+
 export const LOCALE_COOKIE = 'NEXT_LOCALE';
 
 export type Locale = 'zh' | 'en';
@@ -19,8 +21,14 @@ const EN_AVAILABLE_PATHS = new Set<string>([
   '/blog',
   '/faq',
   '/contact',
+  '/mcp',
   '/privacy',
   '/terms',
+  '/playground',
+  '/brand-monitoring',
+  '/social-listening',
+  '/sample/bambu-lab',
+  STATIC_BLOG_EXAMPLE_ZH_PATH,
 ]);
 
 /** 去掉尾部斜杠(根路径除外)，统一比较口径。 */

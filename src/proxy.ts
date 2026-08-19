@@ -65,6 +65,23 @@ function pass(req: NextRequest): NextResponse {
 export function proxy(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
 
+  // Language switch links include an explicit `lang` parameter so switching
+  // still works before client-side JavaScript has hydrated. Persist the choice
+  // and immediately return to a clean canonical URL.
+  const requestedLocale = req.nextUrl.searchParams.get('lang');
+  if (requestedLocale === 'en' || requestedLocale === 'zh') {
+    const url = req.nextUrl.clone();
+    url.searchParams.delete('lang');
+    const res = NextResponse.redirect(url);
+    res.cookies.set(LOCALE_COOKIE, requestedLocale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+    });
+    res.headers.set('Vary', 'Accept-Language, Cookie');
+    return res;
+  }
+
   const cookieValue = req.cookies.get(LOCALE_COOKIE)?.value;
   const cookieLocale: Locale | undefined =
     cookieValue === 'en' || cookieValue === 'zh' ? cookieValue : undefined;

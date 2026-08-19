@@ -59,7 +59,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+    font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
     background: linear-gradient(180deg, hsl(243 45% 20%) 0%, hsl(258 50% 28%) 100%);
     background-attachment: fixed;
     min-height: 100vh;
@@ -228,13 +228,66 @@
         0 0 56px hsl(142 71% 45% / 0.25);
     }
   }
+
+  /* ── Logo 轮播(首页社会证明) ──
+     .logo-marquee 内的 .logo-marquee-track 需渲染两份等长内容,
+     translateX(-50%) 后正好回到第一份的起点,形成无缝循环。 */
+  .logo-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .logo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: logo-scroll-x 26s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes logo-scroll-x {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-marquee-track {
+      animation: none;
+    }
+  }
+}
+
+/* Homepage redesign: an editorial, light canvas inspired by the supplied
+   Figma reference. Scoped so pricing, docs and blog pages keep their themes. */
+.clean-landing {
+  color-scheme: light;
+  background: #f8f7f1;
+  color: #101010;
+}
+
+.clean-landing h1,
+.clean-landing h2,
+.clean-landing h3,
+.clean-landing h4,
+.clean-landing h5,
+.clean-landing h6 {
+  color: inherit;
+}
+
+.clean-landing ::selection {
+  background: #f5ff63;
+  color: #101010;
 }
 
 /* ── Blog article typography (left-aligned, headings, bold) ── */
 .prose-article {
-  color: rgb(203 213 225);
+  color: rgb(16 16 16 / 0.7);
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.8;
   text-align: left;
 }
 .prose-article > p,
@@ -244,27 +297,29 @@
 }
 .prose-article .lead {
   font-size: 18px;
-  color: rgb(226 232 240);
+  color: rgb(16 16 16 / 0.82);
 }
 .prose-article h2 {
-  color: white;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 2.5rem 0 1rem;
+  color: #101010;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 3.25rem 0 1rem;
   scroll-margin-top: 6rem;
 }
 .prose-article h3 {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 1.75rem 0 0.75rem;
+  color: #101010;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 2.25rem 0 0.75rem;
   scroll-margin-top: 6rem;
 }
 .prose-article h4 {
-  color: rgb(226 232 240);
+  color: #101010;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 800;
   margin: 1.5rem 0 0.5rem;
   scroll-margin-top: 6rem;
 }
@@ -280,36 +335,37 @@
 }
 .prose-article ul::marker,
 .prose-article ul > li::marker {
-  color: rgb(74 222 128 / 0.6);
+  color: #6f7cff;
 }
 .prose-article li {
   margin-bottom: 0.4rem;
 }
 .prose-article strong {
-  color: white;
-  font-weight: 600;
+  color: #101010;
+  font-weight: 800;
 }
 .prose-article a {
-  color: rgb(74 222 128);
+  color: #3445d8;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .prose-article blockquote {
-  border-left: 3px solid rgb(74 222 128 / 0.5);
-  padding-left: 1rem;
-  margin: 1.5rem 0;
-  color: rgb(226 232 240);
-  font-style: italic;
+  border-left: 4px solid #101010;
+  padding: 1.1rem 1.25rem;
+  margin: 2rem 0;
+  background: #f5ff63;
+  color: rgb(16 16 16 / 0.78);
+  font-style: normal;
 }
 .prose-article img {
-  border-radius: 0.75rem;
+  border: 1px solid #101010;
   margin: 1.75rem 0;
   width: 100%;
 }
 .prose-article hr {
   border: 0;
-  border-top: 1px solid rgb(255 255 255 / 0.1);
-  margin: 2rem 0;
+  border-top: 1px solid rgb(16 16 16 / 0.18);
+  margin: 2.5rem 0;
 }
 
 /* ── Blog CTA block (Lexical "Call to Action" block) ──────────────────────
@@ -324,20 +380,17 @@
   --cta-ink: #f7faf9;
 }
 .cta-surface {
-  --_surface: color-mix(in oklch, var(--cta-accent) 9%, #0b1120);
-  --_line: color-mix(in oklch, var(--cta-accent) 32%, transparent);
+  --_surface: color-mix(in oklch, var(--cta-accent) 10%, #f8f7f1);
+  --_line: #101010;
   --_btn-hover: color-mix(in oklch, var(--cta-accent), white 14%);
   --_glow: color-mix(in oklch, var(--cta-accent) 45%, transparent);
   position: relative;
   display: flex;
   gap: 1.25rem 1.5rem;
   padding: 1.5rem 1.6rem;
-  border-radius: 16px;
   background: var(--_surface);
   border: 1px solid var(--_line);
-  box-shadow:
-    0 1px 0 0 color-mix(in oklch, var(--cta-accent) 22%, transparent) inset,
-    0 18px 40px -28px rgb(0 0 0 / 0.8);
+  box-shadow: 7px 7px 0 #f5ff63;
 }
 .cta-copy {
   min-width: 0;
@@ -349,19 +402,19 @@
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: color-mix(in oklch, var(--cta-accent) 72%, #cbd5e1);
+  color: color-mix(in oklch, var(--cta-accent) 70%, #101010);
 }
 .cta-title {
   margin: 0;
-  color: #f8fafc;
+  color: #101010;
   font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  letter-spacing: -0.025em;
   line-height: 1.35;
 }
 .cta-desc {
   margin: 0.4rem 0 0;
-  color: #94a3b8;
+  color: rgb(16 16 16 / 0.58);
   font-size: 0.92rem;
   line-height: 1.6;
 }
@@ -372,7 +425,7 @@ a.cta-button {
   gap: 0.5rem;
   flex-shrink: 0;
   padding: 0.72rem 1.35rem;
-  border-radius: 10px;
+  border-radius: 999px;
   font-size: 0.92rem;
   font-weight: 600;
   line-height: 1;
@@ -419,7 +472,7 @@ a.cta-button:hover .cta-arrow {
   .cta--inline a.cta-button {
     align-self: center;
   }
-  .cta--inline[data-has-copy='false'] .cta-surface {
+  .cta--inline[data-has-copy="false"] .cta-surface {
     justify-content: center;
   }
 }
@@ -430,7 +483,6 @@ a.cta-button:hover .cta-arrow {
   align-items: stretch;
   gap: 1rem;
   padding: 1.35rem;
-  border-radius: 14px;
 }
 .cta--sidebar .cta-title {
   font-size: 1.02rem;

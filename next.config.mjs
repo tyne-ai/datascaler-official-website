@@ -4,6 +4,8 @@ import { fileURLToPath } from 'url';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// const monorepoRoot = path.resolve(dirname, '../..');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
